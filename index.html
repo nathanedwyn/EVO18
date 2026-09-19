@@ -1512,6 +1512,108 @@ html { scroll-behavior:smooth; }
   body.evo18-menu-open{overflow:hidden!important}
 }
 </style>
+
+
+
+<style id="evo18-mobile-true-layout">
+@media (max-width: 800px) {
+  .config-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+    align-items: stretch !important;
+  }
+
+  .config-layout > .product-config-copy {
+    display: contents !important;
+  }
+
+  .config-layout > .product-config-copy > h1 {
+    order: 1 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .config-layout > .product-config-copy > .lead {
+    order: 2 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .config-layout > .product-config-copy > .muted {
+    order: 3 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .config-layout > .phone-stage {
+    order: 4 !important;
+    width: 100% !important;
+    min-height: 310px !important;
+    height: 310px !important;
+    margin: 0 !important;
+    padding: 8px !important;
+    display: grid !important;
+    place-items: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .config-layout > .phone-stage .product-phone-image {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: min(76vw, 285px) !important;
+    max-width: 285px !important;
+    max-height: 295px !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+
+  .config-layout > .product-config-copy > .selector {
+    order: 5 !important;
+    margin-top: 0 !important;
+    padding-top: 18px !important;
+  }
+
+  /* True circular homepage colour controls. Only geometry is overridden;
+     the existing .black/.silver/.glacier/.burgundy backgrounds remain intact. */
+  .hero-colours {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .hero-colours > .hero-colour {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+    flex: 0 0 28px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+}
+</style>
+
+<style id="evo18-mobile-hero-colour-hitarea">
+@media(max-width:800px){
+  .hero-controls{position:relative!important;z-index:20!important}
+  .hero-colours{position:relative!important;z-index:21!important;pointer-events:auto!important}
+  .hero-colour{
+    position:relative!important;
+    z-index:22!important;
+    pointer-events:auto!important;
+    touch-action:manipulation!important;
+    -webkit-tap-highlight-color:transparent!important;
+    cursor:pointer!important;
+  }
+}
+</style>
 </head>
 <body><button id="evo18-mobile-menu-toggle" class="evo18-mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
   <span class="evo18-menu-word">MENU</span>
@@ -1603,6 +1705,7 @@ function setHeroProduct(model,colour,button){
   else if(cached) cached.onload=swap;
   else swap();
 }
+window.setHeroProduct=setHeroProduct;
 function home(){return `<main>
 <section class="hero-premium">
   <div class="wrap hero-premium-inner">
@@ -2334,6 +2437,73 @@ if(document.readyState==='loading'){
     },{passive:true});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+
+
+
+
+
+<script id="evo18-mobile-hero-colour-direct-fix">
+(function(){
+  function init(){
+    document.querySelectorAll('.hero-colours').forEach(function(group){
+      if(group.dataset.evoDirectBound==='1') return;
+      group.dataset.evoDirectBound='1';
+
+      function changeColour(e){
+        var btn=e.target && e.target.closest ? e.target.closest('.hero-colour') : null;
+        if(!btn || !group.contains(btn)) return;
+
+        if(e.type==='touchstart') e.preventDefault();
+        e.stopPropagation();
+
+        var colour=btn.getAttribute('data-colour');
+        if(!colour) return;
+
+        var activeModel=document.querySelector('.hero-model-switch button.active');
+        var model=(activeModel && /max/i.test(activeModel.textContent)) ? 'max' : 'pro';
+        var img=document.getElementById('heroProductImage');
+        if(!img) return;
+
+        var file='./assets/phones/'+model+'-'+colour.toLowerCase()+'.webp';
+
+        document.querySelectorAll('.hero-colour').forEach(function(x){
+          x.classList.toggle('active',x===btn);
+        });
+
+        img.classList.add('is-changing');
+
+        var pre=new Image();
+        pre.onload=function(){
+          img.src=file;
+          img.alt='iPhone 18 '+(model==='max'?'Pro Max':'Pro')+' '+colour;
+          var name=document.getElementById('heroProductName');
+          var label=document.getElementById('heroProductColour');
+          if(name) name.textContent='iPhone 18 '+(model==='max'?'Pro Max':'Pro');
+          if(label) label.textContent=colour;
+          requestAnimationFrame(function(){img.classList.remove('is-changing')});
+        };
+        pre.onerror=function(){
+          /* Fallback: still switch the actual image element if a browser
+             rejects the preload request. */
+          img.src=file;
+          img.classList.remove('is-changing');
+        };
+        pre.src=file;
+
+        window.heroModel=model;
+        window.heroColour=colour;
+      }
+
+      group.addEventListener('touchstart',changeColour,{passive:false,capture:true});
+      group.addEventListener('pointerdown',changeColour,{passive:true,capture:true});
+      group.addEventListener('click',changeColour,{passive:true,capture:true});
+    });
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
   else init();
 })();
 </script>
