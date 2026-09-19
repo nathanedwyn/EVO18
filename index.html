@@ -901,102 +901,182 @@ button:not(.order-button):not(.evo18-toast-retry):not(.search-button):not(.evo18
   }
 }
 </style>
+<style id="evo18-warranty-page-style">.warranty-page .source-copy{max-width:860px;margin:48px auto 80px}.warranty-page .source-copy h2{margin:42px 0 14px}.warranty-page .source-copy p{max-width:820px;line-height:1.8}.warranty-page .head{max-width:860px;margin:auto}</style>
+<style id="evo18-mobile-optimization">
+/* EVO18 mobile optimization — preserves desktop styling */
+*{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+img,video,canvas,svg{max-width:100%;height:auto}
+button,a,input,select,textarea{touch-action:manipulation}
 
-<style id="evo18-scan-pop-reference">
-/* Reference-style hit animation: the target expands while fading away. */
-#evo18-scan-overlay .evo18-scan-target.found{
-  opacity:0 !important;
-  pointer-events:none !important;
-  transform:translate(-50%,-50%) scale(1.8) !important;
-  transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .22s ease !important;
+@media (max-width: 768px){
+  body{font-size:15px}
+  .wrap,.container,.section,.content{width:100%;max-width:100%;padding-left:20px!important;padding-right:20px!important}
+
+  /* Navbar */
+  header,nav,.navbar,.site-header{
+    width:100%;
+  }
+  header nav,.navbar nav,nav{
+    gap:14px;
+  }
+  header nav a,.navbar nav a,nav a{
+    white-space:nowrap;
+  }
+
+  /* Hero */
+  h1{font-size:clamp(38px,11vw,62px);line-height:.98}
+  h2{font-size:clamp(28px,8vw,44px)}
+  h3{font-size:clamp(20px,6vw,30px)}
+  p{line-height:1.6}
+
+  /* Prevent desktop grids from overflowing */
+  .grid,.cards,.features,.products,.product-grid,.compare-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  /* Tables/comparison sections */
+  .table-wrap,.comparison-table,.compare-table{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  /* Buttons */
+  .buttons,.hero-actions,.actions{
+    flex-direction:column!important;
+    align-items:stretch!important;
+    width:100%;
+  }
+  .buttons a,.buttons button,.hero-actions a,.hero-actions button,
+  .actions a,.actions button{
+    width:100%;
+    min-height:48px;
+  }
+
+  /* Product / card media */
+  .card,.product-card,.feature-card{
+    min-width:0!important;
+    width:100%!important;
+  }
+
+  /* Scan game */
+  #evo18-scan-overlay{
+    width:100vw!important;
+    max-width:100vw!important;
+    overflow:hidden;
+  }
+
+  /* Footer */
+  footer .grid,footer .columns,footer .links{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media (max-width: 480px){
+  .wrap,.container,.section,.content{
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+  h1{font-size:clamp(34px,12vw,48px)}
+  .eyebrow{font-size:11px;letter-spacing:.16em}
+
+  /* Give touch targets enough room without making the UI bulky */
+  button,a[role="button"]{min-height:44px}
 }
 </style>
 
-<style id="evo18-scan-hover-freeze-final">
-/* Freeze scan-marker size/position while hovering. The found animation below
-   remains free to expand after a successful hit. */
-#evo18-scan-overlay .evo18-scan-target:not(.found):hover,
-#evo18-scan-overlay .evo18-scan-target:not(.found):focus,
-#evo18-scan-overlay .evo18-scan-target:not(.found):active{
-  transform:translate(-50%,-50%) scale(.8) !important;
-}
-#evo18-scan-overlay .evo18-scan-target.near:not(.found):hover,
-#evo18-scan-overlay .evo18-scan-target.near:not(.found):focus,
-#evo18-scan-overlay .evo18-scan-target.near:not(.found):active{
-  transform:translate(-50%,-50%) scale(1.2) !important;
+<style id="evo18-mobile-menu">
+.evo18-mobile-menu-btn,.evo18-mobile-drawer{display:none}
+@media(max-width:768px){
+  .evo18-mobile-menu-btn{
+    position:fixed!important;
+    top:14px;
+    right:16px;
+    display:flex!important;
+    align-items:center;
+    justify-content:center;
+    width:44px;height:44px;
+    padding:0;border:0;background:transparent;
+    cursor:pointer;position:relative;z-index:10002;
+  }
+  .evo18-mobile-menu-btn span,
+  .evo18-mobile-menu-btn span:before,
+  .evo18-mobile-menu-btn span:after{
+    display:block;width:21px;height:1.5px;
+    background:currentColor;border-radius:2px;
+    transition:transform .25s ease,opacity .2s ease;
+    content:"";
+  }
+  .evo18-mobile-menu-btn span:before{position:absolute;transform:translateY(-7px)}
+  .evo18-mobile-menu-btn span:after{position:absolute;transform:translateY(7px)}
+  .evo18-mobile-menu-btn.is-open span{background:transparent}
+  .evo18-mobile-menu-btn.is-open span:before{transform:rotate(45deg)}
+  .evo18-mobile-menu-btn.is-open span:after{transform:rotate(-45deg)}
+
+  .evo18-mobile-drawer{
+    position:fixed;inset:0;z-index:10001;
+    display:flex;flex-direction:column;
+    padding:92px 24px 32px;
+    background:rgba(248,248,246,.97);
+    -webkit-backdrop-filter:blur(22px) saturate(130%);
+    backdrop-filter:blur(22px) saturate(130%);
+    transform:translateY(-12px);
+    opacity:0;visibility:hidden;
+    transition:opacity .25s ease,transform .3s ease,visibility .25s;
+  }
+  .evo18-mobile-drawer.is-open{
+    opacity:1;visibility:visible;transform:translateY(0);
+  }
+  .evo18-mobile-drawer a{
+    display:block;padding:16px 0;
+    font-size:22px;line-height:1.2;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,.08);
+  }
+  .evo18-mobile-drawer .mobile-order{
+    margin-top:24px;
+    padding:15px 20px;
+    text-align:center;border:0;border-radius:999px;
+  }
+  html.dark .evo18-mobile-drawer,body.dark .evo18-mobile-drawer,
+  html[data-theme="dark"] .evo18-mobile-drawer,
+  body[data-theme="dark"] .evo18-mobile-drawer{
+    background:rgba(248,248,246,.97);color:#111;
+  }
+  body.evo18-menu-open{overflow:hidden}
 }
 </style>
-<style id="evo18-warranty-returns-style">
-.warranty-page .source-copy{max-width:860px;margin:48px auto 80px}
-.warranty-page .source-copy h2{margin:42px 0 14px}
-.warranty-page .source-copy p{max-width:820px;line-height:1.8}
-.warranty-page .contact-details{max-width:820px}
-.warranty-page .contact-details p{margin:0 0 18px}
-.warranty-page .contact-details a{color:inherit}
-.warranty-page .head{max-width:860px;margin:auto}
+
+<style id="evo18-navbar-always-visible">
+header, .navbar, .site-header{
+  visibility:visible!important;
+  opacity:1!important;
+}
+@media(min-width:769px){
+  header, .navbar, .site-header{
+    display:block!important;
+    transform:none!important;
+  }
+}
 </style>
-<style id="evo18-toolbar-premium">
-/* Premium toolbar polish — restrained, Apple-style */
-header, .navbar, nav{
-  transition:background-color .35s ease, backdrop-filter .35s ease,
-             -webkit-backdrop-filter .35s ease, box-shadow .35s ease,
-             padding .35s ease, transform .35s ease;
-}
-header.evo18-scrolled, .navbar.evo18-scrolled, nav.evo18-scrolled{
-  background:rgba(8,8,9,.72)!important;
-  -webkit-backdrop-filter:blur(18px) saturate(125%);
-  backdrop-filter:blur(18px) saturate(125%);
-  box-shadow:0 8px 30px rgba(0,0,0,.16);
-}
-header.evo18-scrolled, .navbar.evo18-scrolled, nav.evo18-scrolled{
-  padding-top:10px;
-  padding-bottom:10px;
-}
-/* Navigation links: subtle center-out underline */
-header nav a, .navbar a, nav a{
-  position:relative;
-  transition:opacity .22s ease, color .22s ease;
-}
-header nav a:not(.order-now)::after,
-.navbar a:not(.order-now)::after,
-nav a:not(.order-now)::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-7px;
-  width:0;
-  height:1px;
-  transform:translateX(-50%);
-  background:currentColor;
-  opacity:.75;
-  transition:width .28s cubic-bezier(.2,.7,.2,1);
-}
-header nav a:not(.order-now):hover::after,
-.navbar a:not(.order-now):hover::after,
-nav a:not(.order-now):hover::after{
-  width:70%;
-}
-header nav a:hover, .navbar a:hover, nav a:hover{opacity:.82}
-/* Search: smoother expand/fade if it is already an expanding control */
-input[type="search"], .search-input, .search-box input{
-  transition:width .3s cubic-bezier(.2,.7,.2,1), opacity .2s ease,
-             transform .3s ease, box-shadow .25s ease;
-}
-/* Order Now: subtle premium lift; preserve existing shine */
-header a.order-now, .navbar a.order-now, nav a.order-now,
-header button.order-now, .navbar button.order-now, nav button.order-now{
-  transition:transform .25s cubic-bezier(.2,.8,.2,1),
-             box-shadow .25s ease, filter .25s ease;
-}
-header a.order-now:hover, .navbar a.order-now:hover, nav a.order-now:hover,
-header button.order-now:hover, .navbar button.order-now:hover, nav button.order-now:hover{
-  transform:translateY(-1px);
-  filter:brightness(1.06);
-}
-@media (prefers-reduced-motion:reduce){
-  header, .navbar, nav, header nav a, .navbar a, nav a,
-  input[type="search"], .search-input, .search-box input{
-    transition:none!important;
+
+<style id="evo18-pc-navbar-always-visible">
+@media (min-width:769px){
+  /* Keep the PC navbar permanently in the viewport. */
+  .header{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    z-index:9999!important;
+    visibility:visible!important;
+    opacity:1!important;
+    transform:none!important;
+  }
+  #app{
+    padding-top:72px!important;
   }
 }
 </style>
@@ -1031,7 +1111,7 @@ function toast(t){let x=document.querySelector('.toast');if(!x){x=document.creat
 function add(kind){const c=config[kind],model=kind==='pro'?'iPhone 18 Pro':'iPhone 18 Pro Max',key=model+'|'+c.colour+'|'+c.storage;const found=cart.find(x=>x.key===key);if(found)found.qty++;else cart.push({key,type:'phone',model,colour:c.colour,storage:c.storage,price:prices[kind][c.storage],qty:1,image:phoneImg(c.colour)});save();toast('Added to cart')}
 function remove(i){cart.splice(i,1);save();render()}
 function header(){return `<header class="header"><div class="wrap nav"><a class="brand" href="#/"><span>EVO18</span><small>by Edwyn</small></a><nav class="links"><a href="#/">Home</a><a href="#/models">iPhone 18 Pro</a><a href="#/accessories">Accessories</a><a href="#/trade-in">Trade-In</a><a href="#/compare">Compare</a><a href="#/cart">Cart (${cart.reduce((a,x)=>a+x.qty,0)})</a><a href="#/account">Account</a><a href="#/about">About</a><a href="#/blog">Blog</a></nav><div class="nav-actions"><button class="search-button" type="button" aria-label="Search" onclick="toggleEvoSearch()"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l5 5"></path></svg></button><a class="order-button" href="#/shop">Order Now</a><button class="tool menu" onclick="location.hash='#/shop'">Shop</button><button class="tool" id="theme" aria-label="Toggle dark mode">◐</button></div></div></header>`}
-function footer(){return '<footer class="footer"><div class="wrap"><div class="footgrid"><div><div class="brand">EVO18</div><p>The Next iPhone. Now in Sri Lanka.</p><p>Founded by Sathiyanathan Edwyn Nirmalan</p></div><div><h4>Shop</h4><a href="#/models">iPhone 18 Pro</a><a href="#/accessories">Accessories</a></div><div><h4>Explore</h4><a href="#/compare">Compare</a><a href="#/colours">Colours</a><a href="#/prices">Prices</a><a href="#/trade-in">Trade-In</a></div><div><h4>Support</h4><a href="#/contact">Contact</a><a href="#/warranty-returns">Warranty &amp; Returns</a><a href="#/track-order">Track Order</a><a href="#/faq">FAQs</a></div><div><h4>Company</h4><a href="#/about">About EVO18</a></div></div><div class="bottom">EVO18 — The Next iPhone. Now in Sri Lanka. · Founded by Sathiyanathan Edwyn Nirmalan</div></div></footer>'}
+function footer(){return '<footer class="footer"><div class="wrap"><div class="footgrid"><div><div class="brand">EVO18</div><p>The Next iPhone. Now in Sri Lanka.</p><p>Founded by Sathiyanathan Edwyn Nirmalan</p></div><div><h4>Shop</h4><a href="#/models">iPhone 18 Pro</a><a href="#/accessories">Accessories</a></div><div><h4>Explore</h4><a href="#/compare">Compare</a><a href="#/colours">Colours</a><a href="#/prices">Prices</a><a href="#/trade-in">Trade-In</a></div><div><h4>Support</h4><a href="#/contact">Contact</a><a href="#/warranty-returns">Warranty</a><a href="#/track-order">Track Order</a><a href="#/faq">FAQs</a></div><div><h4>Company</h4><a href="#/about">About EVO18</a></div></div><div class="bottom">EVO18 — The Next iPhone. Now in Sri Lanka. · Founded by Sathiyanathan Edwyn Nirmalan</div></div></footer>'}
 function mount(c){document.getElementById('app').innerHTML=header()+c+footer();document.getElementById('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';localStorage.setItem('evo18-theme',document.documentElement.dataset.theme)}}
 function home(){return '<main><section class="hero"><div class="wrap hero-inner"><div class="eyebrow">THE NEW iPHONE 18 PRO</div><h1>Pro Has a New Standard.</h1><p class="lead">Meet iPhone 18 Pro and iPhone 18 Pro Max — Apple\'s latest Pro generation, built around A20 Pro performance, an advanced 48MP camera system, exceptional battery life and the next generation of Apple Intelligence.</p><div class="actions center"><a class="btn primary" href="#/models">Shop iPhone 18 Pro</a><a class="btn secondary" href="#/compare">Compare Models</a></div></div></section><section class="section"><div class="wrap"><div class="head"><div class="eyebrow">INTRODUCING iPHONE 18 PRO</div><h2>Built for More.</h2><p>iPhone 18 Pro and iPhone 18 Pro Max bring together Apple\'s latest advances in performance, photography, battery life and intelligence. Powered by A20 Pro and designed around an advanced Pro camera system, the new generation is made for demanding work, creative projects, everyday moments and everything in between.</p><a class="btn primary" href="#/models">Explore iPhone 18 Pro</a></div><div class="grid g2"><article class="card model pro"><h3>iPhone 18 Pro</h3><p>Pro power in a refined form. A20 Pro performance, an advanced 48MP Pro Fusion camera system and a new variable-aperture Main camera make iPhone 18 Pro a powerful choice for photography, video, work and everyday use.</p><div class="price">Starting from: LKR 499,900</div><br><a class="btn primary" href="#/models">Explore iPhone 18 Pro</a></article><article class="card model max"><h3>iPhone 18 Pro Max</h3><p>More screen. More battery. More Pro. The largest iPhone 18 Pro experience combines a spacious 6.9-inch display with A20 Pro performance, an advanced Pro Fusion camera system and Apple\'s biggest increase in iPhone battery life.</p><div class="price">Starting from: LKR 529,900</div><br><a class="btn primary" href="#/models">Explore iPhone 18 Pro Max</a></article></div></div></section><section class="section"><div class="wrap"><div class="head"><h2>Why EVO18</h2></div><div class="grid g3"><article class="card"><h3>Authentic Products</h3><p>Know what you\'re buying. EVO18 is built around clear product information and transparent purchasing. Product authenticity and sourcing details should be displayed according to EVO18\'s verified supply arrangements. [VERIFY EVO18 AUTHENTICITY/SOURCING CLAIM]</p></article><article class="card"><h3>Transparent Pricing</h3><p>No guessing at checkout. See the selected model, storage, colour and applicable charges before placing your order.</p></article><article class="card"><h3>Secure Checkout</h3><p>A checkout designed around confidence. Your order information and payment details should be handled through EVO18\'s verified payment infrastructure. [VERIFY PAYMENT PROVIDER]</p></article><article class="card"><h3>Islandwide Delivery</h3><p>From Colombo to across Sri Lanka. EVO18 offers delivery throughout Sri Lanka, subject to service availability and the applicable delivery terms. [VERIFY DELIVERY TIMES AND COVERAGE]</p></article><article class="card"><h3>Warranty Support</h3><p>Support after purchase matters. EVO18 provides access to warranty information and support based on the applicable product and warranty terms. [VERIFY WARRANTY ARRANGEMENT]</p></article><article class="card"><h3>Customer Assistance</h3><p>Need help choosing? Ask us. Not sure which model, storage capacity or colour is right for you? Our team can help you understand your options before you buy.</p></article></div></div></section><section class="section"><div class="wrap"><div class="head"><h2>Your Next iPhone Starts Here.</h2><p>Explore the new iPhone 18 Pro generation and find the model, finish and storage configuration that fits you.</p><a class="btn primary" href="#/models">Shop iPhone 18 Pro</a></div></div></section></main>'}
 function phoneImg(c){return 'assets/phone-'+c.toLowerCase()+'.svg'}
@@ -1091,7 +1171,7 @@ function openFullBlog(i){
 }
 
 
-function warrantyReturnsPage(){return '<main class="source-page warranty-page"><section class="section"><div class="wrap"><div class="head"><div class="eyebrow">WARRANTY &amp; RETURNS</div><h1>Warranty &amp; Returns</h1><p>We want you to know what happens after your purchase.</p></div><div class="source-copy">\n<h2>Warranty</h2>\n<p>All EVO18 products are covered by the warranty applicable to the specific product and purchase. Warranty terms, duration and eligibility may vary depending on the product and applicable supplier or manufacturer warranty.</p>\n<p>Customers should contact EVO18 before making a warranty claim so that the applicable warranty terms and claim process can be confirmed.</p>\n<h2>What\'s Covered</h2>\n<p>Warranty coverage may include defects in materials or workmanship that occur under normal use during the applicable warranty period.</p>\n<p>Coverage is subject to the specific warranty terms applicable to the product.</p>\n<h2>What\'s Not Covered</h2>\n<p>Warranty coverage generally does not apply to damage resulting from accidents, misuse, abuse, unauthorised modifications or repairs, liquid damage where excluded by the applicable warranty, cosmetic damage, or normal wear and tear.</p>\n<p>Specific exclusions depend on the applicable product warranty.</p>\n<h2>Returns</h2>\n<p>Customers may request a return in accordance with EVO18\'s applicable return policy.</p>\n<p>Return eligibility, timeframe and conditions will be confirmed at the time of purchase and may vary depending on the product and reason for return.</p>\n<h2>Exchanges</h2>\n<p>Exchanges may be available where permitted under EVO18\'s applicable exchange policy and subject to product availability and eligibility requirements.</p>\n<p>Customers should contact EVO18 before sending a product back for an exchange.</p>\n<h2>Refunds</h2>\n<p>Where a refund is approved, EVO18 will process the refund in accordance with the applicable refund policy and the original payment method where possible.</p>\n<p>Refund processing times may vary depending on the payment provider or financial institution.</p>\n<h2>Damaged Deliveries</h2>\n<p>If your order arrives damaged, contact EVO18 <strong>as soon as possible after delivery</strong>, preferably on the same day, and provide photographs or other evidence of the condition of the package and product.</p>\n<p>EVO18 will review the reported damage and advise you on the next steps.</p>\n<h2>Incorrect Orders</h2>\n<p>If you receive an incorrect product, contact support before using the product.</p>\n<h2>How to Make a Claim</h2>\n<p>Contact EVO18 with your order number and details of the issue.</p>\n</div></div></section></main>'}
+function warrantyReturnsPage(){return '<main class="source-page warranty-page"><section class="section"><div class="wrap"><div class="head"><div class="eyebrow">WARRANTY &amp; RETURNS</div><h1>Warranty &amp; Returns</h1><p>We want you to know what happens after your purchase.</p></div><div class="source-copy">\n<h2>Warranty</h2><p>All EVO18 products are covered by the warranty applicable to the specific product and purchase. Warranty terms, duration and eligibility may vary depending on the product and applicable supplier or manufacturer warranty.</p><p>Customers should contact EVO18 before making a warranty claim so that the applicable warranty terms and claim process can be confirmed.</p>\n<h2>What\'s Covered</h2><p>Warranty coverage may include defects in materials or workmanship that occur under normal use during the applicable warranty period.</p><p>Coverage is subject to the specific warranty terms applicable to the product.</p>\n<h2>What\'s Not Covered</h2><p>Warranty coverage generally does not apply to damage resulting from accidents, misuse, abuse, unauthorised modifications or repairs, liquid damage where excluded by the applicable warranty, cosmetic damage, or normal wear and tear.</p><p>Specific exclusions depend on the applicable product warranty.</p>\n<h2>Returns</h2><p>Customers may request a return in accordance with EVO18\'s applicable return policy.</p><p>Return eligibility, timeframe and conditions will be confirmed at the time of purchase and may vary depending on the product and reason for return.</p>\n<h2>Exchanges</h2><p>Exchanges may be available where permitted under EVO18\'s applicable exchange policy and subject to product availability and eligibility requirements.</p><p>Customers should contact EVO18 before sending a product back for an exchange.</p>\n<h2>Refunds</h2><p>Where a refund is approved, EVO18 will process the refund in accordance with the applicable refund policy and the original payment method where possible.</p><p>Refund processing times may vary depending on the payment provider or financial institution.</p>\n<h2>Damaged Deliveries</h2><p>If your order arrives damaged, contact EVO18 <strong>as soon as possible after delivery</strong>, preferably on the same day, and provide photographs or other evidence of the condition of the package and product.</p><p>EVO18 will review the reported damage and advise you on the next steps.</p>\n<h2>Incorrect Orders</h2><p>If you receive an incorrect product, contact support before using the product.</p>\n<h2>How to Make a Claim</h2><p>Contact EVO18 with your order number and details of the issue.</p>\n</div></div></section></main>'}
 function render(){const p=location.hash.replace(/^#/,'')||'/';let c;if(p==='/warranty-returns')c=warrantyReturnsPage();else if(p==='/')c=home();else if(p==='/models'||p==='/shop')c=product('pro');else if(p==='/iphone-18-pro')c=product('pro');else if(p==='/iphone-18-pro-max')c=product('max');else if(p==='/accessories')c=accessoriesPage();else if(p==='/about')c=evoAboutExact();else if(p==='/blog')c=evoBlogExact();else if(p==='/trade-in')c=tradeInPage();else if(p==='/guides'||p==='/journal'||p==='/blogs')c=fullBlogsPage();else if(p==='/account')c=accountPage();else if(p==='/cart')c=cartPage();else if(p==='/checkout')c=checkout();else if(p==='/order-confirmation')c=confirmation();else if(p==='/compare')c='<main><section class="section"><div class="wrap">\n<div class="head"><h1>Compare iPhone 18 Pro Models</h1><p>Compare the essentials before you choose.</p></div>\n<div class="compare-table-wrap"><table class="compare-table">\n<thead><tr><th>Specification</th><th>iPhone 18 Pro</th><th>iPhone 18 Pro Max</th></tr></thead>\n<tbody>\n<tr><th>Display</th><td>6.3-inch LTPO Super Retina XDR OLED</td><td>6.9-inch LTPO Super Retina XDR OLED</td></tr>\n<tr><th>Resolution</th><td>2622 × 1206</td><td>2868 × 1320</td></tr>\n<tr><th>Refresh rate</th><td>1–120Hz ProMotion</td><td>1–120Hz ProMotion</td></tr>\n<tr><th>Chip</th><td>A20 Pro</td><td>A20 Pro</td></tr>\n<tr><th>RAM</th><td>12GB</td><td>12GB</td></tr>\n<tr><th>Rear cameras</th><td>48MP Main + 48MP Ultra Wide + 48MP Telephoto</td><td>48MP Main + 48MP Ultra Wide + 48MP Telephoto</td></tr>\n<tr><th>Main camera</th><td>48MP, variable aperture</td><td>48MP, variable aperture</td></tr>\n<tr><th>Front camera</th><td>18MP Center Stage</td><td>18MP Center Stage</td></tr>\n<tr><th>Storage</th><td>256GB / 512GB / 1TB / 2TB</td><td>256GB / 512GB / 1TB / 2TB</td></tr>\n<tr><th>Battery</th><td>Up to 24 hrs typical use / 36 hrs video playback</td><td>Up to 30 hrs typical use / 45 hrs video playback</td></tr>\n<tr><th>Connectivity</th><td>5G, Wi-Fi 7, Bluetooth 6.0, USB-C</td><td>5G, Wi-Fi 7, Bluetooth 6.0, USB-C</td></tr>\n<tr><th>Water resistance</th><td>IP68</td><td>IP68</td></tr>\n<tr><th>Colours</th><td>Black, Silver, Glacier, Burgundy</td><td>Black, Silver, Glacier, Burgundy</td></tr>\n<tr><th>EVO18 demo price</th><td>From LKR 499,900</td><td>From LKR 529,900</td></tr>\n</tbody></table></div>\n</div></section></main>';else if(p==='/faq')c='<main><section class="section"><div class="wrap"><div class="head"><h1>FAQ</h1></div><div class="faq-list">\n<details><summary>What is the iPhone 18 Pro?</summary><p>iPhone 18 Pro is Apple\'s latest Pro iPhone generation, powered by A20 Pro and featuring an advanced 48MP Pro Fusion camera system.</p></details>\n<details><summary>What is the iPhone 18 Pro Max?</summary><p>iPhone 18 Pro Max is the larger model in Apple\'s iPhone 18 Pro generation, featuring a 6.9-inch display and up to 2TB of storage.</p></details>\n<details><summary>How much is iPhone 18 Pro in Sri Lanka?</summary><p>EVO18 pricing depends on model and storage. See our current iPhone 18 Pro pricing page.</p></details>\n<details><summary>How much is iPhone 18 Pro Max in Sri Lanka?</summary><p>The price varies according to storage configuration. See the current EVO18 price listing.</p></details>\n<details><summary>What colours are available?</summary><p>Black, Silver, Glacier and Burgundy.</p></details>\n<details><summary>What storage options are available?</summary><p>Both iPhone 18 Pro and iPhone 18 Pro Max are available in 256GB, 512GB, 1TB and 2TB configurations.</p></details>\n<details><summary>Which iPhone 18 Pro should I buy?</summary><p>The choice depends on your preferred screen size, battery requirements, storage needs and how you use your phone.</p></details>\n<details><summary>Is iPhone 18 Pro Max better than iPhone 18 Pro?</summary><p>The two models serve different preferences. Pro Max offers a larger display, larger battery capacity and additional maximum storage.</p></details>\n<details><summary>Does iPhone 18 Pro have Apple Intelligence?</summary><p>Yes, subject to supported languages, regions and system requirements.</p></details>\n<details><summary>What chip does iPhone 18 Pro use?</summary><p>A20 Pro.</p></details>\n<details><summary>What camera does iPhone 18 Pro have?</summary><p>A 48MP Pro Fusion camera system with a 48MP Fusion Main camera featuring variable aperture, plus Fusion Ultra Wide and Fusion Telephoto cameras.</p></details>\n<details><summary>Can I buy iPhone 18 Pro online in Sri Lanka?</summary><p>Yes, EVO18 is designed to provide online purchasing, subject to current availability.</p></details>\n</div></div></section></main>';else if(p==='/track-order')c=generic('Track Your Order','<p>Track Your Order. Enter your order details below to check the latest available delivery information.</p><form class="form" onsubmit="event.preventDefault();toast(\'We could not find an order matching those details. Check your information and try again.\')"><input required placeholder="Order Number"><input required placeholder="Email or Phone"><button class="btn primary">Track Order</button></form>');else if(p==='/contact')c=generic('Contact','<p>We\'re Here to Help. Whether you\'re deciding between models, checking availability or need help with an existing order, the EVO18 team is here to help.</p><p>Phone: +94 75 487 0120<br>WhatsApp: +94 75 487 0120<br>Email: contact@evo18.com<br>Address: Colombo<br>Opening Hours: 9:00 am to 10:00 pm</p>');else if(p==='/about')c=generic('About EVO18','<p>The Next iPhone. Now in Sri Lanka.</p><p>EVO18 was created with a simple idea: buying the latest iPhone should feel as considered as the product itself.</p><p>Founded by Sathiyanathan Edwyn Nirmalan, EVO18 is a digital-first iPhone specialist built around research, marketing and customer experience.</p>');else c=generic(p.slice(2).replaceAll('-',' '));mount(c)}
 
 document.addEventListener('submit',function(e){
@@ -1596,18 +1676,54 @@ if(document.readyState==='loading'){
 })();
 </script>
 
-<script id="evo18-toolbar-scroll">
+<script id="evo18-mobile-menu-script">
 (function(){
-  function updateToolbar(){
-    var scrolled=window.scrollY>18;
-    document.querySelectorAll('header, .navbar, nav').forEach(function(el){
-      if(el.closest('footer')) return;
-      el.classList.toggle('evo18-scrolled',scrolled);
+  function init(){
+    if(document.querySelector('.evo18-mobile-drawer')) return;
+    var btn=document.querySelector('.evo18-mobile-menu-btn');
+    if(!btn) return;
+    var drawer=document.createElement('div');
+    drawer.className='evo18-mobile-drawer';
+    drawer.setAttribute('aria-hidden','true');
+
+    var links=[];
+    document.querySelectorAll('header nav a,.navbar nav a,nav a').forEach(function(a){
+      if(!a.closest('.evo18-mobile-drawer') && !links.some(function(x){return x.href===a.href})){
+        links.push(a);
+      }
     });
+    links.forEach(function(a){
+      var x=a.cloneNode(true);
+      x.className='';
+      drawer.appendChild(x);
+    });
+    document.body.appendChild(drawer);
+
+    function close(){
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Open menu');
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden','true');
+      document.body.classList.remove('evo18-menu-open');
+    }
+    function open(){
+      btn.classList.add('is-open');
+      btn.setAttribute('aria-expanded','true');
+      btn.setAttribute('aria-label','Close menu');
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden','false');
+      document.body.classList.add('evo18-menu-open');
+    }
+    btn.addEventListener('click',function(){drawer.classList.contains('is-open')?close():open()});
+    drawer.addEventListener('click',function(e){
+      if(e.target.closest('a')) close();
+    });
+    window.addEventListener('resize',function(){if(window.innerWidth>768) close()});
   }
-  window.addEventListener('scroll',updateToolbar,{passive:true});
-  updateToolbar();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
 })();
 </script>
-</body>
+<button class="evo18-mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button></body>
 </html>
