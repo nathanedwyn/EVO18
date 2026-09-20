@@ -1850,6 +1850,22 @@ html { scroll-behavior:smooth; }
 .accessory-note strong{color:var(--text);white-space:nowrap}
 @media(max-width:1050px){.accessory-product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.accessory-hero-grid{gap:40px}.accessory-hero-stack{min-height:420px}.stack-card-main{inset:10px 30px 45px 5px}}
 @media(max-width:800px){.accessory-hero-new{padding:65px 0 55px}.accessory-hero-grid{grid-template-columns:1fr}.accessory-hero-stack{min-height:360px;max-width:620px;margin:5px auto 0;width:100%}.accessory-section-head{display:block}.accessory-section-head p{margin-top:14px}.accessory-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.accessory-feature{grid-template-columns:1fr}.accessory-feature .feature-image{min-height:400px}.accessory-note{display:block}.accessory-note span{display:block;margin-top:6px}}
+.accessory-mobile-filter{display:none}
+@media(max-width:800px){
+  .accessory-tabs-new{display:none!important}
+  .accessory-mobile-filter{display:block;margin:18px 0 24px}
+  .accessory-mobile-filter label{display:block;margin:0 0 8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .accessory-mobile-select-wrap{position:relative}
+  .accessory-mobile-select{appearance:none;-webkit-appearance:none;width:100%;height:52px;padding:0 48px 0 16px;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--text);font:inherit;font-size:15px;font-weight:700;outline:none;box-shadow:0 8px 22px rgba(0,0,0,.08)}
+  .accessory-mobile-select:focus{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .accessory-mobile-select-chevron{position:absolute;right:17px;top:50%;transform:translateY(-58%);pointer-events:none;font-size:20px;line-height:1;color:var(--muted)}
+  .accessory-note{display:none!important}
+}
+@media(max-width:480px){
+  .accessory-mobile-filter{margin:16px 0 20px}
+  .accessory-mobile-select{height:50px;border-radius:14px;font-size:14px}
+}
+
 @media(max-width:560px){.accessory-hero-new h1{font-size:54px}.accessory-hero-new p{font-size:17px}.accessory-hero-actions .btn{width:100%;text-align:center}.accessory-hero-stack{min-height:300px}.stack-card-main{inset:8px 22px 34px 0;padding:22px}.stack-card-small{width:43%;height:42%;padding:13px}.accessory-catalog{padding-top:55px}.accessory-product-grid{grid-template-columns:1fr}.accessory-product-image{height:280px}.accessory-product-copy p{min-height:0}.accessory-feature{margin-top:50px}.accessory-feature .feature-copy{padding:30px}.accessory-feature .feature-image{min-height:330px;padding:28px}}
 </style>
 
@@ -2443,714 +2459,76 @@ html { scroll-behavior:smooth; }
 }
 </style>
 
-<style id="evo18-accessories-light-contrast-v2">
-/* Light-mode accessory contrast: keep white products clearly separated from the page. */
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-hero-new{
-  background:radial-gradient(circle at 76% 34%,rgba(107,43,54,.08),transparent 30%),#f5f3ef;
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-hero-stack .stack-card{
-  background:linear-gradient(145deg,#ece9e4,#dfdcd6);
-  border-color:#c9c5be;
-  box-shadow:0 24px 55px rgba(35,31,27,.14), inset 0 1px 0 rgba(255,255,255,.7);
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-product-card{
-  background:#fbfaf8;
-  border-color:#c9c5be;
-  box-shadow:0 10px 28px rgba(35,31,27,.06);
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-product-image{
-  background:linear-gradient(145deg,#e7e4df,#dcd8d2);
-  border-bottom:1px solid #d0ccc5;
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-product-image img{
-  filter:drop-shadow(0 18px 20px rgba(24,22,20,.20));
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-tabs-new .accessory-tab{
-  background:#fbfaf8;
-  border-color:#c9c5be;
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-feature .feature-image{
-  background:linear-gradient(145deg,#e7e4df,#dcd8d2);
-  border-color:#c9c5be;
-  box-shadow:0 16px 36px rgba(35,31,27,.08), inset 0 1px 0 rgba(255,255,255,.65);
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-feature .feature-image img{
-  filter:drop-shadow(0 25px 28px rgba(24,22,20,.22));
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-feature .feature-copy{
-  background:#fbfaf8;
-  border-color:#c9c5be;
-  box-shadow:0 12px 30px rgba(35,31,27,.05);
-}
-:root:not([data-theme="dark"]) .accessories-revamped .accessory-note{
-  background:#e7e4df;
-  border-color:#c9c5be;
-}
-</style>
-
-<style id="evo18-frosted-dark-accessory-cards">
-/* Dark mode: frosted-glass accessory cards to match the refined light-mode treatment. */
-html[data-theme="dark"] .accessory-card,
-body[data-theme="dark"] .accessory-card,
-html.dark .accessory-card,
-body.dark .accessory-card,
-html[data-theme="dark"] .product-card,
-body[data-theme="dark"] .product-card,
-html.dark .product-card,
-body.dark .product-card {
-  background: rgba(255,255,255,.055) !important;
-  background-image: none !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.065),
-    inset 0 -1px 0 rgba(0,0,0,.20),
-    0 12px 30px rgba(0,0,0,.18) !important;
-  backdrop-filter: blur(14px) saturate(115%);
-  -webkit-backdrop-filter: blur(14px) saturate(115%);
-}
-
-/* Keep product image surfaces clean so the frosted card does the visual work. */
-html[data-theme="dark"] .accessory-card::before,
-body[data-theme="dark"] .accessory-card::before,
-html.dark .accessory-card::before,
-body.dark .accessory-card::before,
-html[data-theme="dark"] .product-card::before,
-body[data-theme="dark"] .product-card::before,
-html.dark .product-card::before,
-body.dark .product-card::before {
-  background: rgba(255,255,255,.025) !important;
-  opacity: 1 !important;
-}
-
-/* Selected/hover state stays subtle rather than returning to a gradient. */
-html[data-theme="dark"] .accessory-card:hover,
-body[data-theme="dark"] .accessory-card:hover,
-html.dark .accessory-card:hover,
-body.dark .accessory-card:hover,
-html[data-theme="dark"] .product-card:hover,
-body[data-theme="dark"] .product-card:hover,
-html.dark .product-card:hover,
-body.dark .product-card:hover {
-  background: rgba(255,255,255,.075) !important;
-  background-image: none !important;
-  border-color: rgba(255,255,255,.15) !important;
-}
-</style>
-
-
-<style id="evo18-dark-frost-no-gradient">
-/* Pure frosted dark surface — no gradient. */
-html[data-theme="dark"] .accessory-card,
-body[data-theme="dark"] .accessory-card,
-html.dark .accessory-card,
-body.dark .accessory-card,
-html[data-theme="dark"] .product-card,
-body[data-theme="dark"] .product-card,
-html.dark .product-card,
-body.dark .product-card {
-  background: rgba(255,255,255,.055) !important;
-  background-image: none !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 12px 28px rgba(0,0,0,.16) !important;
-  backdrop-filter: blur(14px) saturate(110%);
-  -webkit-backdrop-filter: blur(14px) saturate(110%);
-}
-
-html[data-theme="dark"] .accessory-card:hover,
-body[data-theme="dark"] .accessory-card:hover,
-html.dark .accessory-card:hover,
-body.dark .accessory-card:hover,
-html[data-theme="dark"] .product-card:hover,
-body[data-theme="dark"] .product-card:hover,
-html.dark .product-card:hover,
-body.dark .product-card:hover {
-  background: rgba(255,255,255,.07) !important;
-  background-image: none !important;
-}
-</style>
-
-
-<style id="evo18-accessories-match-iphone-pro-card">
-/* Accessories cards: mirror the visual language of the iPhone 18 Pro product box. */
-.accessory-card,
-.product-card {
-  background: rgba(255,255,255,.045) !important;
-  background-image: none !important;
-  border: 1px solid rgba(255,255,255,.085) !important;
-  border-radius: 22px !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.045),
-    0 10px 24px rgba(0,0,0,.10) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.accessory-card:hover,
-.product-card:hover {
-  background: rgba(255,255,255,.06) !important;
-  background-image: none !important;
-  border-color: rgba(255,255,255,.12) !important;
-}
-
-/* Light mode uses the same clean, restrained surface treatment as the Pro box. */
-html[data-theme="light"] .accessory-card,
-body[data-theme="light"] .accessory-card,
-html.light .accessory-card,
-body.light .accessory-card,
-html[data-theme="light"] .product-card,
-body[data-theme="light"] .product-card,
-html.light .product-card,
-body.light .product-card {
-  background: rgba(255,255,255,.72) !important;
-  background-image: none !important;
-  border-color: rgba(0,0,0,.075) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.82),
-    0 10px 24px rgba(0,0,0,.055) !important;
-}
-</style>
-
-
-<style id="evo18-remove-accessory-gradients-final">
-/* FINAL: remove every gradient from accessory item boxes. */
-.accessories-page .accessory-card,
-.accessories .accessory-card,
-.accessory-grid .accessory-card,
-.accessories-page .product-card,
-.accessories .product-card,
-.accessory-grid .product-card,
-section[class*="accessor"] .accessory-card,
-section[class*="accessor"] .product-card,
-[class*="accessory"] [class*="card"],
-[class*="accessory"] .product-card {
-  background: #f4f4f2 !important;
-  background-image: none !important;
-  background-color: #f4f4f2 !important;
-  box-shadow: 0 10px 24px rgba(0,0,0,.055) !important;
-  border: 1px solid rgba(0,0,0,.075) !important;
-}
-
-html.dark .accessories-page .accessory-card,
-body.dark .accessories-page .accessory-card,
-html.dark .accessories .accessory-card,
-body.dark .accessories .accessory-card,
-html.dark .accessory-grid .accessory-card,
-body.dark .accessory-grid .accessory-card,
-html.dark .accessories-page .product-card,
-body.dark .accessories-page .product-card,
-html.dark .accessories .product-card,
-body.dark .accessories .product-card,
-html.dark .accessory-grid .product-card,
-body.dark .accessory-grid .product-card,
-html[data-theme="dark"] .accessories-page .accessory-card,
-body[data-theme="dark"] .accessories-page .accessory-card,
-html[data-theme="dark"] .accessories .accessory-card,
-body[data-theme="dark"] .accessories .accessory-card,
-html[data-theme="dark"] .accessory-grid .accessory-card,
-body[data-theme="dark"] .accessory-grid .accessory-card,
-html[data-theme="dark"] .accessories-page .product-card,
-body[data-theme="dark"] .accessories-page .product-card,
-html[data-theme="dark"] .accessories .product-card,
-body[data-theme="dark"] .accessories .product-card,
-html[data-theme="dark"] .accessory-grid .product-card,
-body[data-theme="dark"] .accessory-grid .product-card {
-  background: #202024 !important;
-  background-image: none !important;
-  background-color: #202024 !important;
-  box-shadow: 0 10px 24px rgba(0,0,0,.22) !important;
-  border-color: rgba(255,255,255,.09) !important;
-}
-
-/* Kill pseudo-element gradients that can create the remaining visible wash. */
-[class*="accessory"] [class*="card"]::before,
-[class*="accessory"] [class*="card"]::after,
-[class*="accessory"] .product-card::before,
-[class*="accessory"] .product-card::after {
-  background: none !important;
-  background-image: none !important;
-}
-</style>
-
-
-<style id="evo18-accessory-iphone-box-final">
-/* Match the iPhone 18 Pro product-box treatment: flat tonal surfaces, no gradients. */
-[data-theme="dark"] .accessory-product-card,
-html.dark .accessory-product-card,
-body.dark .accessory-product-card {
-  background: #18181b !important;
-  background-image: none !important;
-  border-color: #39393e !important;
-  box-shadow: none !important;
-}
-
-[data-theme="dark"] .accessory-product-image,
-html.dark .accessory-product-image,
-body.dark .accessory-product-image,
-[data-theme="dark"] .accessory-feature .feature-image,
-html.dark .accessory-feature .feature-image,
-body.dark .accessory-feature .feature-image {
-  background: #232327 !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-
-[data-theme="dark"] .accessory-product-card::before,
-[data-theme="dark"] .accessory-product-card::after,
-html.dark .accessory-product-card::before,
-html.dark .accessory-product-card::after,
-body.dark .accessory-product-card::before,
-body.dark .accessory-product-card::after,
-[data-theme="dark"] .accessory-product-image::before,
-[data-theme="dark"] .accessory-product-image::after,
-html.dark .accessory-product-image::before,
-html.dark .accessory-product-image::after,
-body.dark .accessory-product-image::before,
-body.dark .accessory-product-image::after {
-  background: none !important;
-  background-image: none !important;
-  content: none !important;
-}
-</style>
-
-
-<style id="evo18-complete-setup-light-dark-fix">
-/* Complete the setup — adaptive product presentation for both themes. */
-.accessory-feature .feature-image {
-  position: relative !important;
-  overflow: hidden !important;
-  isolation: isolate;
-  background: #eeeeec !important;
-  background-image: none !important;
-  border: 1px solid rgba(0,0,0,.07) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.85),
-    0 14px 34px rgba(0,0,0,.06) !important;
-}
-
-.accessory-feature .feature-image::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: -1 !important;
-  background: rgba(255,255,255,.18) !important;
-  background-image: none !important;
-}
-
-.accessory-feature .feature-image img {
-  position: relative !important;
-  z-index: 1 !important;
-  filter: drop-shadow(0 22px 24px rgba(0,0,0,.18)) !important;
-}
-
-/* Dark mode: darker neutral surface so white/silver accessories remain visible
-   without introducing a gradient. */
-html.dark .accessory-feature .feature-image,
-body.dark .accessory-feature .feature-image,
-html[data-theme="dark"] .accessory-feature .feature-image,
-body[data-theme="dark"] .accessory-feature .feature-image {
-  background: #242428 !important;
-  background-image: none !important;
-  border-color: rgba(255,255,255,.10) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.045),
-    0 14px 34px rgba(0,0,0,.22) !important;
-}
-
-html.dark .accessory-feature .feature-image::before,
-body.dark .accessory-feature .feature-image::before,
-html[data-theme="dark"] .accessory-feature .feature-image::before,
-body[data-theme="dark"] .accessory-feature .feature-image::before {
-  background: rgba(255,255,255,.025) !important;
-  background-image: none !important;
-}
-
-html.dark .accessory-feature .feature-image img,
-body.dark .accessory-feature .feature-image img,
-html[data-theme="dark"] .accessory-feature .feature-image img,
-body[data-theme="dark"] .accessory-feature .feature-image img {
-  filter: drop-shadow(0 24px 28px rgba(0,0,0,.48)) !important;
-}
-</style>
-
-
-<style id="evo18-complete-setup-match-product-boxes">
-/* Complete the setup: use the same neutral card surface as the accessory/product
-   boxes so the treatment automatically follows light/dark mode. */
-.stack-card {
-  background: var(--surface2) !important;
-  background-image: none !important;
-  border: 1px solid var(--line) !important;
-  box-shadow: 0 28px 70px rgba(0,0,0,.13) !important;
-}
-
-.stack-card-main,
-.stack-card-small {
-  background: var(--surface2) !important;
-  background-image: none !important;
-}
-
-.stack-card img {
-  background: transparent !important;
-}
-
-/* Dark mode: keep the exact same tonal relationship as the other dark-mode
-   product boxes, without any white panels behind the products. */
-[data-theme="dark"] .stack-card,
-html.dark .stack-card,
-body.dark .stack-card {
-  background: var(--surface2) !important;
-  background-image: none !important;
-  border-color: var(--line) !important;
-  box-shadow: 0 28px 70px rgba(0,0,0,.28) !important;
-}
-
-[data-theme="dark"] .stack-card-main,
-[data-theme="dark"] .stack-card-small,
-html.dark .stack-card-main,
-html.dark .stack-card-small,
-body.dark .stack-card-main,
-body.dark .stack-card-small {
-  background: var(--surface2) !important;
-  background-image: none !important;
-}
-</style>
-
-
-<style id="evo18-mobile-models-remove-background-art">
-/* Mobile product/Shop view: remove the fixed architectural red/black
-   background artwork that shows through underneath the bottom navigation.
-   The navigation itself is left completely untouched. */
-@media (max-width: 768px) {
-  body:has(.config-layout)::before,
-  body:has(.config-layout)::after {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-    opacity: 0 !important;
+<style id="evo18-mobile-bottom-nav-hard-lock">
+@media (max-width:768px){
+  html,body{width:100%!important;min-width:0!important;max-width:none!important;overflow-x:hidden!important;}
+  body{padding-bottom:92px!important;}
+  body > .evo18-mobile-bottom-nav{
+    display:grid!important;
+    position:fixed!important;
+    left:12px!important;
+    right:12px!important;
+    bottom:calc(12px + env(safe-area-inset-bottom))!important;
+    top:auto!important;
+    width:auto!important;
+    max-width:none!important;
+    height:62px!important;
+    margin:0!important;
+    padding:7px 8px!important;
+    box-sizing:border-box!important;
+    transform:none!important;
+    translate:none!important;
+    float:none!important;
+    clear:none!important;
+    z-index:2147483647!important;
+    position:fixed!important;
+    isolation:isolate!important;
+    contain:layout paint!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    will-change:auto!important;
   }
-
-  body:has(.config-layout) {
-    background: var(--bg) !important;
-    background-image: none !important;
+  body > .evo18-mobile-bottom-nav a,
+  body > .evo18-mobile-bottom-nav button{
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+  body.evo18-menu-open > .evo18-mobile-bottom-nav{
+    opacity:.35!important;
+    pointer-events:none!important;
   }
 }
 </style>
 
-
-<style id="evo18-mobile-remove-hidden-sticky-actions">
-@media (max-width: 768px) {
-  /* The old mobile sticky Add to Cart / Buy Now bar was sitting underneath
-     the newer bottom navigation, leaving its red primary button visible as
-     a stuck red/black shape. The bottom navigation replaces it on mobile. */
-  .sticky {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
+<style id="evo18-mobile-search-top-final">
+@media (max-width:768px){
+  .header .nav-actions .search-button{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    padding:0!important;
+    margin:0!important;
+    opacity:.82!important;
+    color:inherit!important;
+    border:0!important;
+    background:transparent!important;
   }
-}
-</style>
-
-
-<style id="evo18-case-model-selector">
-.accessory-case-model-area{margin-bottom:14px}
-.accessory-model-choice-row{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.accessory-model-choice-row .accessory-choice{padding:9px 10px;min-height:38px;font-size:12px;line-height:1.15}
-.accessory-model-choice-row .accessory-choice.active{border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
-.accessory-feature .accessory-model-choice-row{max-width:430px}
-@media(max-width:600px){
-  .accessory-model-choice-row .accessory-choice{font-size:11px;padding:8px 7px}
-}
-</style>
-
-
-<style id="evo18-case-feature-panel-no-squeeze">
-/* Cases now has one additional selector, so the featured panel must be content-led
-   rather than forcing the copy into the old fixed height. */
-.accessory-feature{
-  height:auto !important;
-  min-height:560px !important;
-  max-height:none !important;
-  align-items:stretch;
-}
-.accessory-feature .feature-copy{
-  height:auto !important;
-  min-height:560px !important;
-  overflow:visible;
-  justify-content:center;
-  padding:38px 42px !important;
-}
-.accessory-feature .feature-copy h2{
-  margin-top:8px;
-  margin-bottom:16px;
-}
-.accessory-feature .feature-copy p{
-  margin-bottom:20px;
-}
-.accessory-feature .accessory-case-model-area{
-  margin-top:2px;
-  margin-bottom:17px;
-}
-.accessory-feature .accessory-model-choice-row{
-  width:100%;
-  max-width:none;
-}
-.accessory-feature .accessory-model-choice-row .accessory-choice{
-  flex:1 1 0;
-  min-width:0;
-  padding:10px 12px;
-}
-.accessory-feature .accessory-feature-options{
-  margin-bottom:20px;
-}
-.accessory-feature .accessory-feature-price{
-  margin-top:2px;
-  margin-bottom:18px;
-}
-@media(max-width:800px){
-  .accessory-feature{
-    min-height:0 !important;
+  .header .nav-actions .search-button svg{
+    width:18px!important;
+    height:18px!important;
+    display:block!important;
   }
-  .accessory-feature .feature-copy{
-    min-height:0 !important;
-    padding:28px !important;
-  }
-}
-</style>
-
-
-<style id="evo18-compact-cases-premium">
-/* Compact premium accessory cards */
-.accessories-grid .accessory-card{
-  min-height:0 !important;
-}
-.accessories-grid .accessory-card .accessory-product-image{
-  height:clamp(180px, 17vw, 220px) !important;
-  min-height:0 !important;
-}
-.accessories-grid .accessory-card .accessory-card-content{
-  padding:20px 24px 22px !important;
-}
-.accessories-grid .accessory-card .accessory-card-description{
-  margin-bottom:14px !important;
-}
-.accessories-grid .accessory-card .accessory-variant-area{
-  margin-bottom:12px !important;
-}
-.accessories-grid .accessory-card .accessory-variant-label{
-  margin-bottom:7px !important;
-}
-.accessories-grid .accessory-card .accessory-choice-row{
-  gap:6px !important;
-}
-.accessories-grid .accessory-card .accessory-choice{
-  padding:8px 10px !important;
-  min-height:34px !important;
-}
-.accessories-grid .accessory-card .accessory-price-row{
-  margin-top:14px !important;
-  padding-top:12px !important;
-}
-.accessories-grid .accessory-card .accessory-add{
-  min-height:40px !important;
-  padding:9px 15px !important;
-}
-
-/* Cases: keep model + finish controls compact and visually balanced */
-.accessories-grid .accessory-card[data-accessory-id="cases"] .accessory-case-model-area{
-  margin-bottom:11px !important;
-}
-.accessories-grid .accessory-card[data-accessory-id="cases"] .accessory-model-choice-row{
-  display:grid !important;
-  grid-template-columns:1fr 1fr !important;
-  gap:6px !important;
-}
-.accessories-grid .accessory-card[data-accessory-id="cases"] .accessory-model-choice-row .accessory-choice{
-  font-size:11px !important;
-  padding:8px 7px !important;
-}
-.accessories-grid .accessory-card[data-accessory-id="cases"] .accessory-feature-options{
-  margin-bottom:10px !important;
-}
-.accessories-grid .accessory-card[data-accessory-id="cases"] .accessory-choice-row{
-  flex-wrap:nowrap !important;
-}
-.accessories-grid .accessory-card[data-accessory-id="cases"] .accessory-choice{
-  flex:0 0 auto !important;
-}
-@media(max-width:900px){
-  .accessories-grid .accessory-card .accessory-product-image{
-    height:190px !important;
-  }
-}
-@media(max-width:600px){
-  .accessories-grid .accessory-card .accessory-product-image{
-    height:180px !important;
-  }
-  .accessories-grid .accessory-card .accessory-card-content{
-    padding:18px 18px 20px !important;
-  }
-}
-</style>
-
-
-<style id="evo18-accessory-card-single-title">
-.accessory-product-card .accessory-product-copy>h3{
-  margin-bottom:16px !important;
-}
-.accessory-product-card .accessory-product-copy{
-  padding-top:20px !important;
-}
-@media(max-width:600px){
-  .accessory-product-card .accessory-product-copy{
-    padding-top:17px !important;
-  }
-  .accessory-product-card .accessory-product-copy>h3{
-    margin-bottom:13px !important;
-  }
-}
-</style>
-
-
-<style id="evo18-magsafe-battery-treatment">
-/* MagSafe is represented on the battery card, not the Cases card. */
-.accessory-product-card[data-accessory-id="magsafe-battery"],
-.accessory-product-card[data-accessory-id="battery"]{
-  position:relative;
-  overflow:hidden;
-}
-.accessory-product-card[data-accessory-id="magsafe-battery"]::after,
-.accessory-product-card[data-accessory-id="battery"]::after{
-  content:"";
-  position:absolute;
-  width:170px;
-  height:170px;
-  right:-42px;
-  bottom:72px;
-  border:1px solid rgba(177,44,76,.14);
-  border-radius:50%;
-  box-shadow:
-    0 0 0 18px rgba(177,44,76,.035),
-    0 0 0 38px rgba(177,44,76,.018);
-  pointer-events:none;
-}
-.accessory-product-card[data-accessory-id="magsafe-battery"]::before,
-.accessory-product-card[data-accessory-id="battery"]::before{
-  content:"MAGSAFE";
-  position:absolute;
-  right:24px;
-  bottom:48px;
-  font-size:9px;
-  letter-spacing:.18em;
-  font-weight:600;
-  color:rgba(177,44,76,.42);
-  pointer-events:none;
-}
-.accessory-product-card[data-accessory-id="magsafe-battery"] > *,
-.accessory-product-card[data-accessory-id="battery"] > *{
-  position:relative;
-  z-index:1;
-}
-@media (prefers-color-scheme: light){
-  .accessory-product-card[data-accessory-id="magsafe-battery"]::after,
-  .accessory-product-card[data-accessory-id="battery"]::after{
-    border-color:rgba(145,35,62,.12);
-    box-shadow:
-      0 0 0 18px rgba(145,35,62,.025),
-      0 0 0 38px rgba(145,35,62,.012);
-  }
-}
-</style>
-
-
-
-
-
-
-
-
-<style id="evo18-desktop-cart-nav">
-/* Compact cart icon beside Order Now */
-.header .evo18-nav-cart{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:38px;
-  height:38px;
-  margin-left:2px;
-  color:var(--text);
-  text-decoration:none;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:var(--surface);
-  transition:transform .2s ease,border-color .2s ease,background .2s ease;
-}
-.header .evo18-nav-cart svg{
-  width:18px;
-  height:18px;
-}
-.header .evo18-nav-cart:hover{
-  transform:translateY(-1px);
-  border-color:var(--accent);
-}
-.header .evo18-nav-cart-badge{
-  position:absolute;
-  top:-5px;
-  right:-5px;
-  min-width:16px;
-  height:16px;
-  padding:0 4px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:999px;
-  background:var(--accent);
-  color:#fff;
-  font:700 9px/1 Arial,sans-serif;
-  border:2px solid var(--bg,#f7f7f5);
-}
-@media(max-width:768px){
-  .header .evo18-nav-cart{display:none}
-}
-</style>
-
-
-<style id="evo18-cart-order-position">
-.header .nav-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.header .nav-actions .order-button{
-  order:10;
-}
-.header .nav-actions .evo18-nav-cart{
-  order:11;
-  margin-left:0 !important;
-}
-</style>
-
-
-<style id="evo18-cart-adjacent-to-order">
-@media(min-width:769px){
   .header .nav-actions{
-    display:flex !important;
-    align-items:center !important;
-    gap:10px !important;
-  }
-  .header .nav-actions .search-button{order:1 !important}
-  .header .nav-actions .order-button{order:2 !important}
-  .header .nav-actions .evo18-nav-cart{
-    order:3 !important;
-    display:inline-flex !important;
-    margin:0 !important;
+    display:flex!important;
+    align-items:center!important;
+    gap:6px!important;
   }
 }
 </style>
-
 </head>
 <body><div id="evo18-mobile-legacy-controls" aria-hidden="true"></div>
 <div id="app"></div>
@@ -3200,11 +2578,7 @@ let cart=JSON.parse(localStorage.getItem('evo18-cart')||'[]');
 function money(n){return 'LKR '+Number(n).toLocaleString('en-LK')}
 function updateCartCountNow(){
   const n=Array.isArray(cart)?cart.reduce((a,x)=>a+Number(x.qty||1),0):0;
-  document.querySelectorAll('.evo18-nav-cart').forEach(function(el){
-      const badge=el.querySelector('.evo18-nav-cart-badge');
-      if(badge) badge.textContent=String(n);
-      el.setAttribute('aria-label','Open cart, '+n+' item'+(n===1?'':'s'));
-    });
+  document.querySelectorAll('a[href="#/cart"]:not(#evo18-mobile-cart)').forEach(el=>{el.textContent='Cart ('+n+')'});
   const mobile=document.getElementById('evo18-mobile-cart');
   const badge=mobile&&mobile.querySelector('.evo18-mobile-cart-badge');
   if(badge) badge.textContent=String(n);
@@ -3217,9 +2591,15 @@ function save(){
 function toast(t){let x=document.querySelector('.toast');if(!x){x=document.createElement('div');x.className='toast';document.body.appendChild(x)}x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1700)}
 function add(kind){const c=config[kind],model=kind==='pro'?'iPhone 18 Pro':'iPhone 18 Pro Max',key=model+'|'+c.colour+'|'+c.storage;const found=cart.find(x=>x.key===key);if(found)found.qty++;else cart.push({key,type:'phone',model,colour:c.colour,storage:c.storage,price:prices[kind][c.storage],qty:1,image:phoneImg(kind,c.colour)});save();toast('Added to cart')}
 function remove(i){cart.splice(i,1);save();render()}
-function header(){const r=location.hash.replace(/^#/,'')||'/';const q=cart.reduce((a,x)=>a+x.qty,0);return `<header class="header"><div class="wrap nav"><button id="evo18-mobile-menu-toggle" class="evo18-mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><span class="evo18-menu-icon" aria-hidden="true"><i></i><i></i><i></i></span></button><a class="brand" href="#/"><span>EVO18</span><small>by Edwyn</small></a><nav class="links"><a href="#/">Home</a><a href="#/models">iPhone 18 Pro</a><a href="#/accessories">Accessories</a><a href="#/trade-in">Trade-In</a><a href="#/compare">Compare</a><a href="#/account">Account</a><a href="#/contact">Contact</a><a href="#/about">About</a><a href="#/blog">Blog</a></nav><div class="nav-actions"><button class="search-button" type="button" aria-label="Search" onclick="toggleEvoSearch()"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l5 5"></path></svg></button><a class="order-button" href="#/shop">Order Now</a><a id="evo18-nav-cart" class="evo18-nav-cart" href="#/cart" aria-label="Open cart, ${q} items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l1.7 10.1a2 2 0 0 0 2 1.7h7.9a2 2 0 0 0 1.9-1.5L20.5 8H7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19" r="1.35" fill="currentColor"/><circle cx="17.2" cy="19" r="1.35" fill="currentColor"/></svg><span class="evo18-nav-cart-badge">${q}</span></a><a id="evo18-mobile-cart" class="evo18-mobile-cart mobile-inline-cart" href="#/cart" aria-label="Open cart, ${q} items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l1.7 10.1a2 2 0 0 0 2 1.7h7.9a2 2 0 0 0 1.9-1.5L20.5 8H7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19" r="1.35" fill="currentColor"/><circle cx="17.2" cy="19" r="1.35" fill="currentColor"/></svg><span class="evo18-mobile-cart-badge">${q}</span></a><button class="tool menu" onclick="location.hash='#/shop'">Shop</button><button class="tool" id="theme" aria-label="Toggle dark mode">◐</button></div></div></header><nav class="evo18-mobile-bottom-nav" aria-label="Mobile navigation"><a href="#/" class="${r==='/'?'active':''}" aria-label="Home"><svg class="bottom-icon" viewBox="0 0 24 24"><path d="M3.5 10.7 12 3.8l8.5 6.9V20a1.5 1.5 0 0 1-1.5 1.5h-4.2v-6h-5.6v6H5A1.5 1.5 0 0 1 3.5 20Z"/></svg><span class="bottom-label">Home</span></a><a href="#/models" class="${r==='/models'||r==='/shop'||r==='/iphone-18-pro'||r==='/iphone-18-pro-max'?'active':''}" aria-label="Shop"><svg class="bottom-icon" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2.5"/><path d="M9.5 6h5"/></svg><span class="bottom-label">Shop</span></a><button type="button" class="bottom-search" onclick="toggleEvoSearch()" aria-label="Search"><svg class="bottom-icon" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m16 16 4.5 4.5"/></svg><span class="bottom-label">Search</span></button><a href="#/track-order" class="${r==='/track-order'?'active':''}" aria-label="Orders"><svg class="bottom-icon" viewBox="0 0 24 24"><path d="M5 5.5h14v13H5z"/><path d="M8 9h8M8 12h8M8 15h5"/></svg><span class="bottom-label">Orders</span></a><a href="#/account" class="${r==='/account'?'active':''}" aria-label="Account"><svg class="bottom-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20c.7-3.6 3-5.5 6.5-5.5s5.8 1.9 6.5 5.5"/></svg><span class="bottom-label">Account</span></a></nav>`}
+function header(){const r=location.hash.replace(/^#/,'')||'/';const q=cart.reduce((a,x)=>a+x.qty,0);return `<header class="header"><div class="wrap nav"><button id="evo18-mobile-menu-toggle" class="evo18-mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><span class="evo18-menu-icon" aria-hidden="true"><i></i><i></i><i></i></span></button><a class="brand" href="#/"><span>EVO18</span><small>by Edwyn</small></a><nav class="links"><a href="#/">Home</a><a href="#/models">iPhone 18 Pro</a><a href="#/accessories">Accessories</a><a href="#/trade-in">Trade-In</a><a href="#/compare">Compare</a><a href="#/cart">Cart (${q})</a><a href="#/account">Account</a><a href="#/contact">Contact</a><a href="#/about">About</a><a href="#/blog">Blog</a></nav><div class="nav-actions"><button class="search-button" type="button" aria-label="Search" onclick="toggleEvoSearch()"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l5 5"></path></svg></button><a class="order-button" href="#/shop">Order Now</a><a id="evo18-mobile-cart" class="evo18-mobile-cart mobile-inline-cart" href="#/cart" aria-label="Open cart, ${q} items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l1.7 10.1a2 2 0 0 0 2 1.7h7.9a2 2 0 0 0 1.9-1.5L20.5 8H7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19" r="1.35" fill="currentColor"/><circle cx="17.2" cy="19" r="1.35" fill="currentColor"/></svg><span class="evo18-mobile-cart-badge">${q}</span></a><button class="tool menu" onclick="location.hash='#/shop'">Shop</button><button class="tool" id="theme" aria-label="Toggle dark mode">◐</button></div></div></header><nav class="evo18-mobile-bottom-nav" aria-label="Mobile navigation"><a href="#/" class="${r==='/'?'active':''}" aria-label="Home"><svg class="bottom-icon" viewBox="0 0 24 24"><path d="M3.5 10.7 12 3.8l8.5 6.9V20a1.5 1.5 0 0 1-1.5 1.5h-4.2v-6h-5.6v6H5A1.5 1.5 0 0 1 3.5 20Z"/></svg><span class="bottom-label">Home</span></a><a href="#/models" class="${r==='/models'||r==='/shop'||r==='/iphone-18-pro'||r==='/iphone-18-pro-max'?'active':''}" aria-label="Shop"><svg class="bottom-icon" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2.5"/><path d="M9.5 6h5"/></svg><span class="bottom-label">Shop</span></a><a href="#/accessories" class="${r==='/accessories'?'active':''}" aria-label="Accessories"><svg class="bottom-icon" viewBox="0 0 24 24"><path d="M6.5 7.5h11l1.2 12H5.3l1.2-12Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><span class="bottom-label">Accessories</span></a><a href="#/track-order" class="${r==='/track-order'?'active':''}" aria-label="Orders"><svg class="bottom-icon" viewBox="0 0 24 24"><path d="M5 5.5h14v13H5z"/><path d="M8 9h8M8 12h8M8 15h5"/></svg><span class="bottom-label">Orders</span></a><a href="#/account" class="${r==='/account'?'active':''}" aria-label="Account"><svg class="bottom-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20c.7-3.6 3-5.5 6.5-5.5s5.8 1.9 6.5 5.5"/></svg><span class="bottom-label">Account</span></a></nav>`}
 function footer(){return '<footer class="footer"><div class="wrap"><div class="footgrid"><div><div class="brand">EVO18</div><p>The Next iPhone. Now in Sri Lanka.</p><p>Founded by Sathiyanathan Edwyn</p></div><div><h4>Shop</h4><a href="#/models">iPhone 18 Pro</a><a href="#/accessories">Accessories</a></div><div><h4>Explore</h4><a href="#/compare">Compare</a><a href="#/prices">Prices</a><a href="#/trade-in">Trade-In</a></div><div><h4>Support</h4><a href="#/contact">Contact</a><a href="#/warranty-returns">Warranty</a><a href="#/track-order">Track Order</a><a href="#/faq">FAQs</a></div><div><h4>Company</h4><a href="#/about">About EVO18</a><a href="#/terms">Terms of Service</a><a href="#/privacy">Privacy Policy</a><a href="#/cookies">Cookie Policy</a></div></div><div class="bottom">EVO18 — The Next iPhone. Now in Sri Lanka. · Founded by Sathiyanathan Edwyn</div></div></footer>'}
-function mount(c){document.getElementById('app').innerHTML=header()+c+footer();document.getElementById('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';localStorage.setItem('evo18-theme',document.documentElement.dataset.theme)}}
+function mount(c){
+  const app=document.getElementById('app');
+  app.innerHTML=header()+c+footer();
+  const mobileNav=app.querySelector('.evo18-mobile-bottom-nav');
+  if(mobileNav){ document.body.appendChild(mobileNav); }
+  document.getElementById('theme').onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';localStorage.setItem('evo18-theme',document.documentElement.dataset.theme)}
+}
 let heroModel='pro';
 let heroColour='Black';
 const heroImageCache={};
@@ -4316,6 +3696,7 @@ if(document.readyState==='loading'){
       {id:'black',label:'Black',price:21500,image:'case-black.webp',swatch:'#242424'},
       {id:'burgundy',label:'Burgundy',price:21500,image:'case-burgundy.webp',swatch:'#5b2731'},
       {id:'chambray-blue',label:'Chambray Blue',price:21500,image:'case-chambray-blue.webp',swatch:'#9eafbb'},
+      {id:'clear',label:'Clear',note:'MagSafe',price:24900,image:'case-clear-magsafe.webp',swatch:'linear-gradient(135deg,#fff,#c9d7df)',clear:true},
       {id:'mulberry',label:'Mulberry',price:21500,image:'case-mulberry.webp',swatch:'#765466'},
       {id:'olive',label:'Olive',price:21500,image:'case-olive.webp',swatch:'#68705b'},
       {id:'taupe',label:'Taupe',price:21500,image:'case-taupe.webp',swatch:'#9b8f82'}
@@ -4327,9 +3708,7 @@ if(document.readyState==='loading'){
       {id:'2m',label:'2m',detail:'240W',price:12500,image:'cable-240w-2m.webp'}
     ]},
     {id:'magsafe-charger',name:'MagSafe Charger',category:'MagSafe',price:14900,image:'magsafe-charger.png',desc:'Magnetic wireless charging designed around the iPhone experience.'},
-    {id:'magsafe-battery',name:'MagSafe Battery',category:'Power Banks',price:29900,image:'magsafe-battery.webp',desc:'Extra magnetic power when you need to stay mobile.',bundleOptions:[
-      {id:'battery-only',label:'Battery Only',price:29900,image:'magsafe-battery.webp'}
-    ]},
+    {id:'magsafe-battery',name:'MagSafe Battery',category:'Power Banks',price:29900,image:'magsafe-battery.webp',desc:'Extra magnetic power when you need to stay mobile.'},
     {id:'airpods-max-2',name:'AirPods Max 2',category:'Audio',desc:'Immersive over-ear audio with a choice of refined finishes.',variants:[
       {id:'midnight',label:'Midnight',price:115000,image:'airpods-max-2-midnight.webp',swatch:'#25272a'},
       {id:'blue',label:'Blue',price:115000,image:'airpods-max-2-blue.webp',swatch:'#4d78a5'},
@@ -4342,7 +3721,6 @@ if(document.readyState==='loading'){
   const categories=['All','Cases','Screen Protectors','Chargers','Cables','MagSafe','Power Banks','Audio','Car Accessories'];
   const state={};
   accessories.forEach(p=>{state[p.id]=p.variants?p.variants[0].id:null});
-  const caseModelState={cases:'18-pro'};
   let currentFilter='All';
   let selectedId=null;
   window.EVO18AccessoryProducts=accessories;
@@ -4357,14 +3735,8 @@ if(document.readyState==='loading'){
     if(p.id==='car-magsafe-vent-mount') return A+'car-magsafe-vent-mount.webp';
     return imagePath(p);
   }
-  function productPrice(p){
-    return variant(p).price||p.price;
-  }
-  function productLabel(p){
-    const v=variant(p);
-    if(p.id==='cases') return p.name+' — '+(caseModelState.cases==='18-pro-max'?'iPhone 18 Pro Max':'iPhone 18 Pro')+' — '+v.label+(v.note?' · '+v.note:'');
-    return p.variants ? p.name+' — '+v.label : p.name;
-  }
+  function productPrice(p){return variant(p).price||p.price}
+  function productLabel(p){const v=variant(p); return p.variants ? p.name+' — '+v.label : p.name}
   function animateImageSwap(img, src, alt){
     if(!img || !src || img.src===src) return;
     /* Match the iPhone 18 Pro colour-switch animation exactly:
@@ -4383,9 +3755,6 @@ if(document.readyState==='loading'){
     const v=variant(p);
     if(p.id==='airpods-max-2'){
       return esc(p.name)+'<span class="feature-variant-line">'+esc(v.label)+'</span>';
-    }
-    if(p.id==='cases'){
-      return esc(p.name)+'<span class="feature-variant-line">'+esc(caseModelState.cases==='18-pro-max'?'iPhone 18 Pro Max':'iPhone 18 Pro')+' · '+esc(v.label)+(v.note?' · '+esc(v.note):'')+'</span>';
     }
     if(p.variants){
       return esc(p.name)+'<span class="feature-variant-line">'+esc(v.label)+'</span>';
@@ -4438,39 +3807,15 @@ if(document.readyState==='loading'){
     syncFeature(p,true);
   }
 
-  function caseModelOptions(feature=false){
-    const max=caseModelState.cases==='18-pro-max';
-    return '<div class="accessory-variant-area accessory-case-model-area '+(feature?'accessory-feature-options':'')+'"><div class="accessory-variant-label"><span>Model</span><strong>'+(max?'iPhone 18 Pro Max':'iPhone 18 Pro')+'</strong></div><div class="accessory-choice-row accessory-model-choice-row '+(feature?'accessory-feature-choices':'')+'"><button type="button" class="accessory-choice '+(!max?'active':'')+'" onclick="event.stopPropagation();accessoryCaseModel(\'18-pro\')">iPhone 18 Pro</button><button type="button" class="accessory-choice '+(max?'active':'')+'" onclick="event.stopPropagation();accessoryCaseModel(\'18-pro-max\')">iPhone 18 Pro Max</button></div></div>';
-  }
   function options(p,feature=false){
     if(!p.variants)return '';
     const v=variant(p);
     if(p.id==='cables'){
       return '<div class="accessory-variant-area '+(feature?'accessory-feature-options':'')+'"><div class="accessory-variant-label"><span>Length</span><strong>'+esc(v.label)+' · '+esc(v.detail)+'</strong></div><div class="accessory-choice-row '+(feature?'accessory-feature-choices':'')+'">'+p.variants.map(x=>'<button type="button" class="accessory-choice '+(x.id===v.id?'active':'')+'" onclick="event.stopPropagation();accessoryVariant('+q(p.id)+','+q(x.id)+')">'+esc(x.label)+' <small>'+esc(x.detail)+'</small></button>').join('')+'</div></div>';
     }
-    return (p.id==='cases'?caseModelOptions(feature):'')+'<div class="accessory-variant-area '+(feature?'accessory-feature-options':'')+'"><div class="accessory-variant-label"><span>Finish</span><strong>'+esc(v.label)+(v.note?' · '+esc(v.note):'')+'</strong></div><div class="accessory-swatches '+(feature?'accessory-feature-swatches':'')+'">'+p.variants.map(x=>'<button type="button" aria-label="'+esc(x.label)+(x.note?' — '+esc(x.note):'')+'" title="'+esc(x.label)+(x.note?' — '+esc(x.note):'')+'" class="accessory-swatch '+(x.id===v.id?'active':'')+(x.clear?' clear':'')+'" style="background:'+x.swatch+'" onclick="event.stopPropagation();accessoryVariant('+q(p.id)+','+q(x.id)+')"></button>').join('')+'</div></div>';
+    return '<div class="accessory-variant-area '+(feature?'accessory-feature-options':'')+'"><div class="accessory-variant-label"><span>Finish</span><strong>'+esc(v.label)+(v.note?' · '+esc(v.note):'')+'</strong></div><div class="accessory-swatches '+(feature?'accessory-feature-swatches':'')+'">'+p.variants.map(x=>'<button type="button" aria-label="'+esc(x.label)+(x.note?' — '+esc(x.note):'')+'" title="'+esc(x.label)+(x.note?' — '+esc(x.note):'')+'" class="accessory-swatch '+(x.id===v.id?'active':'')+(x.clear?' clear':'')+'" style="background:'+x.swatch+'" onclick="event.stopPropagation();accessoryVariant('+q(p.id)+','+q(x.id)+')"></button>').join('')+'</div></div>';
   }
-  window.accessoryCaseModel=function(model){
-    if(model!=='18-pro' && model!=='18-pro-max') return;
-    caseModelState.cases=model;
-    const p=accessories.find(x=>x.id==='cases'); if(!p)return;
-    selectedId='cases';
-    document.querySelectorAll('[data-accessory-id="cases"]').forEach(function(card){
-      const area=card.querySelector('.accessory-case-model-area');
-      if(area){
-        const strong=area.querySelector('.accessory-variant-label strong');
-        if(strong) strong.textContent=model==='18-pro-max'?'iPhone 18 Pro Max':'iPhone 18 Pro';
-        area.querySelectorAll('.accessory-model-choice-row .accessory-choice').forEach(function(btn){
-          btn.classList.toggle('active',btn.textContent.trim()===(model==='18-pro-max'?'iPhone 18 Pro Max':'iPhone 18 Pro'));
-        });
-      }
-      const img=card.querySelector('.accessory-product-image img');
-      if(img){
-        img.alt=productLabel(p);
-      }
-    });
-    syncFeature(p,true);
-  };
+
   window.accessoryVariant=function(id,v){setState(id,v)};
   window.accessoryAdd=function(id){
     const p=accessories.find(x=>x.id===id); if(!p)return;
@@ -4495,11 +3840,12 @@ if(document.readyState==='loading'){
     const first=shown.find(x=>x.id===selectedId)||shown[0]||accessories[0];
     const counts={}; accessories.forEach(x=>counts[x.category]=(counts[x.category]||0)+1);
     const pills=categories.map(x=>'<button class="accessory-tab '+(x===filter?'active':'')+'" type="button" onclick="accessoryFilter('+q(x)+')"><span>'+esc(x)+'</span>'+(x!=='All'?'<small>'+counts[x]+'</small>':'<small>'+accessories.length+'</small>')+'</button>').join('');
+    const mobileFilter='<div class="accessory-mobile-filter"><label for="accessoryMobileFilter">Filter accessories</label><div class="accessory-mobile-select-wrap"><select id="accessoryMobileFilter" class="accessory-mobile-select" onchange="accessoryFilter(this.value)">'+categories.map(x=>'<option value="'+esc(x)+'" '+(x===filter?'selected':'')+'>'+esc(x)+(x!=='All'?' ('+counts[x]+')':' ('+accessories.length+')')+'</option>').join('')+'</select><span class="accessory-mobile-select-chevron">⌄</span></div></div>';
     const cards=shown.map(p=>{
       const v=variant(p);
-      return '<article class="accessory-product-card" data-accessory-id="'+esc(p.id)+'" tabindex="0" onclick="accessorySelect('+q(p.id)+')" onkeydown="if(event.key===\'Enter\' || event.key===\' \'){event.preventDefault();accessorySelect('+q(p.id)+')}"><div class="accessory-product-image"><img src="'+imagePath(p)+'" alt="'+esc(productLabel(p))+'" loading="lazy" decoding="async"></div><div class="accessory-product-copy"><h3>'+esc(p.name)+'</h3>'+options(p)+'<div class="accessory-product-bottom"><strong>'+money(productPrice(p))+'</strong><button class="btn primary accessory-add" type="button" onclick="event.stopPropagation();accessoryAdd('+q(p.id)+')">Add to Cart</button></div></div></article>';
+      return '<article class="accessory-product-card" data-accessory-id="'+esc(p.id)+'" tabindex="0" onclick="accessorySelect('+q(p.id)+')" onkeydown="if(event.key===\'Enter\' || event.key===\' \'){event.preventDefault();accessorySelect('+q(p.id)+')}"><div class="accessory-product-image"><img src="'+imagePath(p)+'" alt="'+esc(productLabel(p))+'" loading="lazy" decoding="async"></div><div class="accessory-product-copy"><div class="accessory-product-category">'+esc(p.category)+'</div><h3>'+esc(p.name)+'</h3><p>'+esc(p.desc)+'</p>'+options(p)+'<div class="accessory-product-bottom"><strong>'+money(productPrice(p))+'</strong><button class="btn primary accessory-add" type="button" onclick="event.stopPropagation();accessoryAdd('+q(p.id)+')">Add to Cart</button></div></div></article>';
     }).join('');
-    return '<main class="accessories-revamped"><section class="accessory-hero-new"><div class="wrap"><div class="accessory-hero-grid"><div><div class="eyebrow">EVO18 ACCESSORIES</div><h1>Complete the setup.</h1><p>Cases, charging, power, audio and everyday essentials — selected to sit naturally alongside your iPhone.</p><div class="accessory-hero-actions"><a class="btn primary" href="#/models">Shop iPhone 18 Pro</a><a class="btn secondary" href="#/cart">View Cart</a></div></div><div class="accessory-hero-stack"><div class="stack-card stack-card-main"><img src="'+imagePath(first)+'" alt="'+esc(productLabel(first))+'"></div><div class="stack-card stack-card-small"><img src="'+A+'airpods-max-2-midnight.webp" alt="AirPods Max 2 — Midnight"></div><div class="stack-label"><span>8 products</span><small>7 finish options on cases</small></div></div></div></div></section><section class="section accessory-catalog"><div class="wrap"><div class="accessory-section-head"><div><div class="eyebrow">SHOP ACCESSORIES</div><h2>Build your setup.</h2></div><p>Explore a curated range. Choose a finish or cable length directly on the product card — just like configuring your iPhone.</p></div><div class="accessory-tabs-new">'+pills+'</div><div class="accessory-product-grid">'+cards+'</div><div class="accessory-feature"><div class="feature-image"><img id="accessoryFeatureImg" data-feature-id="'+esc(first.id)+'" src="'+featureImagePath(first)+'" alt="'+esc(productLabel(first))+'" loading="lazy" decoding="async"></div><div class="feature-copy"><div class="eyebrow" id="accessoryFeatureCategory">'+esc(first.category)+'</div><h2 id="accessoryFeatureTitle">'+featureTitleHTML(first)+'</h2><p id="accessoryFeatureText">'+esc(first.desc)+'</p><div id="accessoryFeatureOptions">'+options(first,true)+'</div><div class="accessory-feature-price" id="accessoryFeaturePrice">'+money(productPrice(first))+'</div><button class="btn primary" id="accessoryFeatureAdd" type="button" onclick="accessoryAdd('+q(first.id)+')">Add to Cart</button><a class="feature-cart-link" href="#/cart">Go to Cart →</a></div></div></div></section></main>';
+    return '<main class="accessories-revamped"><section class="accessory-hero-new"><div class="wrap"><div class="accessory-hero-grid"><div><div class="eyebrow">EVO18 ACCESSORIES</div><h1>Complete the setup.</h1><p>Cases, charging, power, audio and everyday essentials — selected to sit naturally alongside your iPhone.</p><div class="accessory-hero-actions"><a class="btn primary" href="#/models">Shop iPhone 18 Pro</a><a class="btn secondary" href="#/cart">View Cart</a></div></div><div class="accessory-hero-stack"><div class="stack-card stack-card-main"><img src="'+imagePath(first)+'" alt="'+esc(productLabel(first))+'"></div><div class="stack-card stack-card-small"><img src="'+A+'airpods-max-2-midnight.webp" alt="AirPods Max 2 — Midnight"></div><div class="stack-label"><span>8 products</span><small>7 finish options on cases</small></div></div></div></div></section><section class="section accessory-catalog"><div class="wrap"><div class="accessory-section-head"><div><div class="eyebrow">SHOP ACCESSORIES</div><h2>Build your setup.</h2></div><p>Explore a curated range. Choose a finish or cable length directly on the product card — just like configuring your iPhone.</p></div><div class="accessory-tabs-new">'+pills+'</div>'+mobileFilter+'<div class="accessory-product-grid">'+cards+'</div><div class="accessory-feature"><div class="feature-image"><img id="accessoryFeatureImg" data-feature-id="'+esc(first.id)+'" src="'+featureImagePath(first)+'" alt="'+esc(productLabel(first))+'" loading="lazy" decoding="async"></div><div class="feature-copy"><div class="eyebrow" id="accessoryFeatureCategory">'+esc(first.category)+'</div><h2 id="accessoryFeatureTitle">'+featureTitleHTML(first)+'</h2><p id="accessoryFeatureText">'+esc(first.desc)+'</p><div id="accessoryFeatureOptions">'+options(first,true)+'</div><div class="accessory-feature-price" id="accessoryFeaturePrice">'+money(productPrice(first))+'</div><button class="btn primary" id="accessoryFeatureAdd" type="button" onclick="accessoryAdd('+q(first.id)+')">Add to Cart</button><a class="feature-cart-link" href="#/cart">Go to Cart →</a></div></div><div class="accessory-note"><strong>Accessory range</strong><span>Product availability, specifications and final pricing should be confirmed before launch.</span></div></div></section></main>';
   };
 })();
 </script>
@@ -4520,126 +3866,55 @@ if(document.readyState==='loading'){
 </style>
 
 
-<style id="evo18-mobile-remove-stuck-scan-ui">
-@media (max-width: 768px) {
-  /* Remove the desktop SCAN control and any scan/decorative targets that can
-     remain fixed behind the mobile bottom navigation. */
-  #evo18-scan-trigger,
-  #evo18-scan-overlay,
-  #evo18-scan-complete,
-  #evo18-scan-hud,
-  #evo18-scan-cursor,
-  .evo18-scan-target,
-  [class*="scan-target"],
-  [id*="scan-target"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-}
-</style>
-
-
-<style id="evo18-mobile-shop-red-black-cleanup">
-@media (max-width: 768px) {
-  /* The red/black static treatment on the Shop model cards is removed on
-     mobile; keep the cards using the normal flat surface used elsewhere. */
-  .model.pro,
-  .model.max,
-  main .card.model.pro,
-  main .card.model.max {
-    background: var(--surface2) !important;
-    background-image: none !important;
-    box-shadow: none !important;
-  }
-}
-</style>
-
-
-<style id="evo18-mobile-shop-background-clean-final">
-@media (max-width: 768px) {
-  /* The stuck red/black shape visible beneath the mobile Shop view is the
-     global architectural body overlay. Remove it only on the Shop route,
-     leaving the rest of the site's visual system untouched. */
-  body:has(.model.pro)::before,
-  body:has(.model.pro)::after {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-  }
-
-  body:has(.model.pro) {
-    background: var(--bg) !important;
-    background-image: none !important;
-  }
-}
-</style>
-
-
 <script id="evo18-mobile-bottom-nav-scroll-top">
 (function(){
-  if(window.__evo18BottomNavScrollBound) return;
-  window.__evo18BottomNavScrollBound=true;
+  function normalizeRoute(href){
+    try{
+      var u=new URL(href,location.href);
+      var h=u.hash||'#/';
+      return h.replace(/^#/,'').split('?')[0].replace(/\/$/,'')||'/';
+    }catch(e){ return '/'; }
+  }
 
-  function normalize(path){
-    path=(path||'/').split('?')[0]||'/';
-    if(path==='/shop'||path==='/iphone-18-pro'||path==='/iphone-18-pro-max') return '/models';
-    if(path==='/orders'||path==='/order'||path==='/track-order') return '/track-order';
-    return path;
+  function currentRoute(){
+    return (location.hash||'#/').replace(/^#/,'').split('?')[0].replace(/\/$/,'')||'/';
+  }
+
+  function scrollToTop(){
+    window.scrollTo({top:0,left:0,behavior:'smooth'});
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
   }
 
   document.addEventListener('click',function(e){
-    if(window.innerWidth>768) return;
-    var link=e.target.closest('.evo18-mobile-bottom-nav a');
+    var link=e.target.closest && e.target.closest('.evo18-mobile-bottom-nav a');
     if(!link) return;
 
-    var target=normalize((link.getAttribute('href')||'').replace(/^#/,''));
-    var current=normalize((location.hash||'#/').replace(/^#/,''));
+    var target=normalizeRoute(link.getAttribute('href')||'');
+    var current=currentRoute();
 
     if(target===current){
       e.preventDefault();
       e.stopPropagation();
-      window.scrollTo({top:0,left:0,behavior:'smooth'});
+      scrollToTop();
+      return;
     }
+
+    /* For a different bottom-nav destination, allow the normal router to
+       change pages, then put the new page at its top. */
+    setTimeout(function(){
+      if(currentRoute()===target) scrollToTop();
+    },80);
   },true);
-})();
-</script>
 
-
-<script id="evo18-accessories-reload-fix">
-(function(){
-  function refreshAccessoriesSafely(){
-    var path=(location.hash||'#/').replace(/^#/,'').split('?')[0]||'/';
-    if(path==='/accessories' && typeof window.render==='function'){
-      try { window.render(); } catch(e) { console.warn('EVO18 accessories reload:',e); }
+  window.addEventListener('hashchange',function(){
+    var target=currentRoute();
+    if(['/','/shop','/accessories','/orders','/account'].indexOf(target)!==-1){
+      setTimeout(scrollToTop,30);
     }
-  }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',function(){ setTimeout(refreshAccessoriesSafely,80); },{once:true});
-  }else{
-    setTimeout(refreshAccessoriesSafely,80);
-  }
+  });
 })();
 </script>
-
-
-<script id="evo18-final-reload-boot">
-(function(){
-  function boot(){
-    if(typeof window.render==='function'){
-      try { window.render(); } catch(e) { console.error('EVO18 reload render failed:',e); }
-    }
-  }
-  function schedule(){ setTimeout(boot,120); }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',schedule,{once:true});
-  }else{
-    schedule();
-  }
-})();
-</script>
-
 </body>
 </html>
 <style id="evo18-mobile-accessory-swatch-circles-v20">
