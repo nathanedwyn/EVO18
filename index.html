@@ -4606,6 +4606,40 @@ if(document.readyState==='loading'){
 })();
 </script>
 
+
+<script id="evo18-accessories-reload-fix">
+(function(){
+  function refreshAccessoriesSafely(){
+    var path=(location.hash||'#/').replace(/^#/,'').split('?')[0]||'/';
+    if(path==='/accessories' && typeof window.render==='function'){
+      try { window.render(); } catch(e) { console.warn('EVO18 accessories reload:',e); }
+    }
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){ setTimeout(refreshAccessoriesSafely,80); },{once:true});
+  }else{
+    setTimeout(refreshAccessoriesSafely,80);
+  }
+})();
+</script>
+
+
+<script id="evo18-final-reload-boot">
+(function(){
+  function boot(){
+    if(typeof window.render==='function'){
+      try { window.render(); } catch(e) { console.error('EVO18 reload render failed:',e); }
+    }
+  }
+  function schedule(){ setTimeout(boot,120); }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',schedule,{once:true});
+  }else{
+    schedule();
+  }
+})();
+</script>
+
 </body>
 </html>
 <style id="evo18-mobile-accessory-swatch-circles-v20">
