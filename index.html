@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>EVO18 — The Next iPhone. Now in Sri Lanka.</title>
 <meta name="description" content="EVO18 — The Next iPhone. Now in Sri Lanka.">
 <link rel="preload" as="image" href="./assets/phones/pro-black.webp" fetchpriority="high">
@@ -2529,6 +2529,351 @@ html { scroll-behavior:smooth; }
   }
 }
 </style>
+
+<style id="evo18-ios-safari-final">
+@supports (-webkit-touch-callout: none) {
+  @media screen and (max-width: 768px) {
+    html, body {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      overflow-x: hidden !important;
+    }
+
+    #app, main, section, .wrap, .grid,
+    .hero-premium-inner, .config-layout,
+    .visual-story-grid, .accessory-feature,
+    .accessory-grid, .accessory-product-grid {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* iOS Safari viewport: avoid desktop vh assumptions for fixed panels. */
+    .evo18-mobile-drawer {
+      max-height: calc(100svh - 82px) !important;
+      max-height: calc(100dvh - 82px) !important;
+    }
+
+    /* ---------- Home / hero ---------- */
+    .hero-product {
+      width: 100% !important;
+      min-width: 0 !important;
+      min-height: 400px !important;
+      height: auto !important;
+      position: relative !important;
+      overflow: hidden !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+    }
+
+    .hero-product img {
+      position: relative !important;
+      inset: auto !important;
+      display: block !important;
+      width: min(310px, 78vw) !important;
+      max-width: 78vw !important;
+      height: auto !important;
+      max-height: 330px !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+      margin: 0 auto !important;
+    }
+
+    .hero-product-meta {
+      left: auto !important;
+      right: 12px !important;
+      bottom: 12px !important;
+      max-width: calc(100% - 24px) !important;
+      box-sizing: border-box !important;
+    }
+
+    /* ---------- Product configuration / phone images ---------- */
+    .config-layout {
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: visible !important;
+    }
+
+    .config-layout > .phone-stage {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 300px !important;
+      min-height: 300px !important;
+      display: grid !important;
+      place-items: center !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .config-layout > .phone-stage .product-phone-image {
+      position: relative !important;
+      inset: auto !important;
+      display: block !important;
+      width: min(74vw, 285px) !important;
+      max-width: 74vw !important;
+      height: auto !important;
+      max-height: 286px !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+      margin: 0 auto !important;
+    }
+
+    /* ---------- Story / visual images ---------- */
+    .visual-story-grid,
+    .visual-story-grid.reverse {
+      width: 100% !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      min-width: 0 !important;
+    }
+
+    .visual-story-media {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      min-height: 0 !important;
+      height: auto !important;
+      aspect-ratio: 1.7 / 1 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+    }
+
+    .visual-story-media img {
+      position: relative !important;
+      inset: auto !important;
+      display: block !important;
+      flex: 0 0 auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      max-height: 100% !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+      margin: 0 auto !important;
+    }
+
+    .chip-media {
+      min-height: 260px !important;
+      height: auto !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+    }
+
+    .chip-media img {
+      position: relative !important;
+      inset: auto !important;
+      width: 58% !important;
+      max-width: 58% !important;
+      height: auto !important;
+      max-height: 80% !important;
+      object-fit: contain !important;
+      transform: none !important;
+      margin: 0 auto !important;
+    }
+
+    .hero-visual-frame {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .hero-visual-frame img {
+      position: relative !important;
+      inset: auto !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+    }
+
+    /* ---------- Pro / Pro Max comparison cards ---------- */
+    .premium-model-card {
+      position: relative !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      min-height: 540px !important;
+      height: auto !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .premium-model-card img,
+    .premium-model-card.max img {
+      position: absolute !important;
+      left: 50% !important;
+      right: auto !important;
+      top: 0 !important;
+      width: 66% !important;
+      max-width: 66% !important;
+      height: 54% !important;
+      max-height: 54% !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: translateX(-50%) !important;
+      margin: 0 !important;
+    }
+
+    .premium-model-card:hover img,
+    .premium-model-card.max:hover img {
+      transform: translateX(-50%) !important;
+    }
+
+    .premium-model-copy {
+      position: relative !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      padding-top: 205px !important;
+      z-index: 3 !important;
+    }
+
+    /* ---------- Accessories ---------- */
+    .accessory-feature {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      overflow: visible !important;
+    }
+
+    .accessory-feature .feature-image {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 330px !important;
+      min-height: 330px !important;
+      max-height: 330px !important;
+      padding: 24px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .accessory-feature .feature-image img,
+    #accessoryFeatureImg {
+      position: relative !important;
+      inset: auto !important;
+      display: block !important;
+      flex: 0 0 auto !important;
+      width: auto !important;
+      max-width: 74% !important;
+      height: auto !important;
+      max-height: 78% !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+      margin: 0 auto !important;
+    }
+
+    .accessory-feature .feature-image img[data-feature-id="cases"] {
+      max-width: 54% !important;
+      max-height: 70% !important;
+    }
+
+    .accessory-feature .feature-image img[data-feature-id="screen-protector"] {
+      max-width: 52% !important;
+      max-height: 68% !important;
+    }
+
+    .accessory-feature .feature-image img[data-feature-id="magsafe-charger"] {
+      max-width: 46% !important;
+      max-height: 80% !important;
+    }
+
+    .accessory-feature .feature-image img[data-feature-id="cables"] {
+      max-width: 80% !important;
+      max-height: 72% !important;
+    }
+
+    .accessory-feature .feature-image img[data-feature-id="car-magsafe-vent-mount"] {
+      max-width: 62% !important;
+      max-height: 76% !important;
+    }
+
+    .accessory-feature .feature-copy {
+      width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    .accessory-product-grid {
+      width: 100% !important;
+      min-width: 0 !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 14px !important;
+    }
+
+    .accessory-product-card,
+    .accessory-card {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .accessory-product-image,
+    .accessory-visual {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 180px !important;
+      min-height: 180px !important;
+      max-height: 180px !important;
+      padding: 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .accessory-product-image img,
+    .accessory-visual img {
+      position: relative !important;
+      inset: auto !important;
+      display: block !important;
+      width: auto !important;
+      max-width: 88% !important;
+      height: auto !important;
+      max-height: 88% !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+      margin: 0 auto !important;
+    }
+
+    /* ---------- General mobile image safety ---------- */
+    img {
+      min-width: 0 !important;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    /* Don't let accidental fixed/absolute children create horizontal
+       scrolling on Safari. */
+    .section, .container, .wrap {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+  }
+}
+</style>
 </head>
 <body><div id="evo18-mobile-legacy-controls" aria-hidden="true"></div>
 <div id="app"></div>
@@ -3913,6 +4258,63 @@ if(document.readyState==='loading'){
       setTimeout(scrollToTop,30);
     }
   });
+})();
+</script>
+
+<script id="evo18-ios-safari-image-loader-final">
+(function(){
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if(!isIOS) return;
+
+  function prepare(){
+    if(window.innerWidth > 768) return;
+    document.querySelectorAll('img').forEach(function(img){
+      try{
+        img.loading='eager';
+        img.setAttribute('loading','eager');
+        img.decoding='async';
+        img.style.webkitBackfaceVisibility='hidden';
+        img.style.backfaceVisibility='hidden';
+      }catch(e){}
+    });
+  }
+
+  function preloadDynamic(){
+    if(window.innerWidth > 768) return;
+    document.querySelectorAll(
+      '#heroProductImage, .product-phone-image, #accessoryFeatureImg, .accessory-product-image img, .accessory-visual img'
+    ).forEach(function(img){
+      if(img.currentSrc || img.src){
+        var pre=new Image();
+        pre.src=img.currentSrc || img.src;
+      }
+    });
+  }
+
+  function run(){
+    prepare();
+    preloadDynamic();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){
+      setTimeout(run,0);
+      setTimeout(run,250);
+    },{once:true});
+  }else{
+    run();
+  }
+
+  window.addEventListener('hashchange',function(){
+    setTimeout(run,40);
+    setTimeout(run,250);
+  });
+
+  var root=document.getElementById('app') || document.body;
+  new MutationObserver(function(){
+    run();
+  }).observe(root,{childList:true,subtree:true});
 })();
 </script>
 </body>
