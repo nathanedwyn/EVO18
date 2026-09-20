@@ -2817,6 +2817,42 @@ body.dark .stack-card-small {
 }
 </style>
 
+
+<style id="evo18-mobile-models-remove-background-art">
+/* Mobile product/Shop view: remove the fixed architectural red/black
+   background artwork that shows through underneath the bottom navigation.
+   The navigation itself is left completely untouched. */
+@media (max-width: 768px) {
+  body:has(.config-layout)::before,
+  body:has(.config-layout)::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    opacity: 0 !important;
+  }
+
+  body:has(.config-layout) {
+    background: var(--bg) !important;
+    background-image: none !important;
+  }
+}
+</style>
+
+
+<style id="evo18-mobile-remove-hidden-sticky-actions">
+@media (max-width: 768px) {
+  /* The old mobile sticky Add to Cart / Buy Now bar was sitting underneath
+     the newer bottom navigation, leaving its red primary button visible as
+     a stuck red/black shape. The bottom navigation replaces it on mobile. */
+  .sticky {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+</style>
+
 </head>
 <body><div id="evo18-mobile-legacy-controls" aria-hidden="true"></div>
 <div id="app"></div>
@@ -4143,6 +4179,63 @@ if(document.readyState==='loading'){
   opacity:.25!important;
   transform:scale(.97) translateY(10px)!important;
   filter:none!important;
+}
+</style>
+
+
+<style id="evo18-mobile-remove-stuck-scan-ui">
+@media (max-width: 768px) {
+  /* Remove the desktop SCAN control and any scan/decorative targets that can
+     remain fixed behind the mobile bottom navigation. */
+  #evo18-scan-trigger,
+  #evo18-scan-overlay,
+  #evo18-scan-complete,
+  #evo18-scan-hud,
+  #evo18-scan-cursor,
+  .evo18-scan-target,
+  [class*="scan-target"],
+  [id*="scan-target"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+</style>
+
+
+<style id="evo18-mobile-shop-red-black-cleanup">
+@media (max-width: 768px) {
+  /* The red/black static treatment on the Shop model cards is removed on
+     mobile; keep the cards using the normal flat surface used elsewhere. */
+  .model.pro,
+  .model.max,
+  main .card.model.pro,
+  main .card.model.max {
+    background: var(--surface2) !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+}
+</style>
+
+
+<style id="evo18-mobile-shop-background-clean-final">
+@media (max-width: 768px) {
+  /* The stuck red/black shape visible beneath the mobile Shop view is the
+     global architectural body overlay. Remove it only on the Shop route,
+     leaving the rest of the site's visual system untouched. */
+  body:has(.model.pro)::before,
+  body:has(.model.pro)::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+  }
+
+  body:has(.model.pro) {
+    background: var(--bg) !important;
+    background-image: none !important;
+  }
 }
 </style>
 
