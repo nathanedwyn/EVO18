@@ -2918,6 +2918,278 @@ html { scroll-behavior:smooth; }
 <meta http-equiv="Expires" content="0">
 <meta name="evo18-build" content="2026-09-21-cart-refresh-persistence">
 
+
+<style id="evo18-premium-color-swatches-v6">
+/* EVO18 — restrained premium metallic colour controls, shared site-wide. */
+.swatches,
+.hero-colours,
+.accessory-swatches{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* Product configurator colour buttons */
+.swatches{gap:14px;padding:3px 0}
+.swatch{
+  --swatch-size:42px;
+  position:relative;
+  width:var(--swatch-size)!important;
+  height:var(--swatch-size)!important;
+  min-width:var(--swatch-size)!important;
+  min-height:var(--swatch-size)!important;
+  flex:0 0 var(--swatch-size);
+  padding:0!important;
+  border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.38)!important;
+  outline:1px solid rgba(0,0,0,.24)!important;
+  outline-offset:2px!important;
+  overflow:visible!important;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transform:translateZ(0);
+  transition:transform .24s cubic-bezier(.22,1,.36,1),
+             box-shadow .24s ease,
+             border-color .22s ease,
+             outline-color .22s ease!important;
+  /* Subtle metallic depth — deliberately no glass/gloss effect */
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.16),
+    inset -2px -2px 4px rgba(0,0,0,.30),
+    0 2px 5px rgba(0,0,0,.14)!important;
+}
+.swatch::before,
+.accessory-swatch::before,
+.hero-colour::before{
+  content:"";
+  position:absolute;
+  inset:3px;
+  border-radius:50%;
+  pointer-events:none;
+  /* Very restrained brushed-metal tonal variation */
+  background:linear-gradient(105deg,rgba(255,255,255,.09),transparent 30%,rgba(0,0,0,.06) 72%,transparent);
+  mix-blend-mode:normal;
+}
+.swatch::after,
+.accessory-swatch::after,
+.hero-colour::after{
+  display:none!important;
+}
+.swatch:hover{
+  transform:translateY(-1px) scale(1.025)!important;
+}
+.swatch.active{
+  border-color:rgba(255,255,255,.82)!important;
+  outline:1.5px solid rgba(255,255,255,.72)!important;
+  outline-offset:4px!important;
+  transform:scale(1.035)!important;
+  /* Small, controlled halo — enough to identify selection without looking neon */
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.18),
+    inset -2px -2px 4px rgba(0,0,0,.30),
+    0 0 0 2px rgba(0,0,0,.12),
+    0 0 7px 1px var(--swatch-glow,rgba(170,180,195,.40))!important;
+}
+
+/* Metallic finishes */
+.swatch[data-c="Black"]{--swatch-glow:rgba(205,212,220,.46);background:linear-gradient(105deg,#111214,#383b40 42%,#17191c 76%,#292c30)!important}
+.swatch[data-c="Silver"]{--swatch-glow:rgba(225,228,230,.50);background:linear-gradient(105deg,#8d9093,#d6d7d6 42%,#9da0a2 76%,#c1c3c3)!important}
+.swatch[data-c="Glacier"]{--swatch-glow:rgba(119,173,210,.48);background:linear-gradient(105deg,#647b8d,#b6c9d6 42%,#738b9d 76%,#9fb5c4)!important}
+.swatch[data-c="Burgundy"]{--swatch-glow:rgba(166,58,79,.52);background:linear-gradient(105deg,#41151e,#7d3343 42%,#4b1924 76%,#652632)!important}
+
+/* Smaller accessory finish selectors — same visual language. */
+.accessory-swatches{gap:11px!important}
+.accessory-swatch{
+  --swatch-glow:rgba(142,32,54,.42);
+  position:relative;
+  width:29px!important;height:29px!important;
+  min-width:29px!important;min-height:29px!important;
+  flex:0 0 29px;
+  border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.34)!important;
+  outline:1px solid rgba(0,0,0,.18);
+  outline-offset:2px;
+  overflow:visible!important;
+  transform:translateZ(0);
+  transition:transform .24s cubic-bezier(.22,1,.36,1),
+             box-shadow .24s ease,
+             border-color .22s ease,
+             outline-color .22s ease!important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.13),
+    inset -2px -2px 4px rgba(0,0,0,.28),
+    0 2px 5px rgba(0,0,0,.13)!important;
+}
+.accessory-swatch:hover{transform:scale(1.035)!important}
+.accessory-swatch.active{
+  outline:1.5px solid rgba(255,255,255,.72)!important;
+  outline-offset:3px;
+  transform:scale(1.055);
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.15),
+    inset -2px -2px 4px rgba(0,0,0,.28),
+    0 0 0 1.5px rgba(0,0,0,.10),
+    0 0 6px 1px var(--swatch-glow)!important;
+}
+.accessory-swatch.clear{
+  background:linear-gradient(105deg,#8b9499,#d6dadd 42%,#929ca1 76%,#b9c1c5)!important;
+}
+
+/* Home hero colour controls */
+.hero-colours{gap:11px!important}
+.hero-colour{
+  --hero-glow:rgba(190,198,207,.44);
+  position:relative!important;
+  width:31px!important;height:31px!important;
+  min-width:31px!important;min-height:31px!important;
+  max-width:31px!important;max-height:31px!important;
+  flex:0 0 31px!important;
+  padding:0!important;
+  border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.36)!important;
+  outline:1px solid rgba(0,0,0,.22)!important;
+  outline-offset:2px!important;
+  overflow:visible!important;
+  isolation:isolate;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent!important;
+  transform:translateZ(0);
+  transition:transform .24s cubic-bezier(.22,1,.36,1),
+             box-shadow .24s ease,
+             border-color .22s ease,
+             outline-color .22s ease!important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.15),
+    inset -2px -2px 4px rgba(0,0,0,.30),
+    0 2px 5px rgba(0,0,0,.15)!important;
+}
+.hero-colour:hover{transform:translateY(-1px) scale(1.025)!important}
+.hero-colour.active{
+  border-color:rgba(255,255,255,.78)!important;
+  outline:1.5px solid rgba(255,255,255,.70)!important;
+  outline-offset:4px!important;
+  transform:scale(1.035)!important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.17),
+    inset -2px -2px 4px rgba(0,0,0,.30),
+    0 0 0 1.5px rgba(0,0,0,.12),
+    0 0 7px 1px var(--hero-glow)!important;
+}
+.hero-colour.black{--hero-glow:rgba(210,216,222,.46);background:linear-gradient(105deg,#111214,#383b40 42%,#17191c 76%,#292c30)!important}
+.hero-colour.silver{--hero-glow:rgba(225,228,230,.48);background:linear-gradient(105deg,#8d9093,#d6d7d6 42%,#9da0a2 76%,#c1c3c3)!important}
+.hero-colour.glacier{--hero-glow:rgba(119,173,210,.48);background:linear-gradient(105deg,#647b8d,#b6c9d6 42%,#738b9d 76%,#9fb5c4)!important}
+.hero-colour.burgundy{--hero-glow:rgba(166,58,79,.50);background:linear-gradient(105deg,#41151e,#7d3343 42%,#4b1924 76%,#652632)!important}
+
+/* Any remaining colourway control elsewhere on the site gets the same restrained selected state. */
+.color-swatch{
+  transition:transform .24s cubic-bezier(.22,1,.36,1),
+             box-shadow .24s ease,
+             border-color .22s ease,
+             outline-color .22s ease!important;
+}
+.color-swatch.active,
+.color-swatch.selected,
+.color-swatch[aria-pressed="true"],
+.color-swatch[aria-selected="true"]{
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,.68),
+    0 0 6px 1px rgba(142,32,54,.38)!important;
+  outline:1px solid rgba(255,255,255,.64)!important;
+  outline-offset:3px!important;
+}
+
+@media (hover:none),(pointer:coarse){
+  .swatch:hover,.accessory-swatch:hover,.hero-colour:hover{transform:none!important}
+  .swatch:active{transform:scale(.98)!important}
+  .accessory-swatch:active,.hero-colour:active{transform:scale(1.015)!important}
+}
+@media (max-width:700px){
+  .swatches{gap:13px}
+  .swatch{--swatch-size:40px}
+  .accessory-swatches{gap:9px!important}
+  .accessory-swatch{width:28px!important;height:28px!important;min-width:28px!important;min-height:28px!important;flex-basis:28px}
+  .hero-colour{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;max-width:29px!important;max-height:29px!important;flex-basis:29px!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .swatch,.accessory-swatch,.hero-colour,.color-swatch{transition:none!important}
+}
+</style>
+
+
+<style id="evo18-premium-selected-state-v2">
+/* Clear, restrained selected state: premium button treatment, no checkmark and no glossy shine. */
+.swatch.active{
+  border-color:#f5f5f5!important;
+  outline:2px solid #a92c47!important;
+  outline-offset:4px!important;
+  transform:scale(1.035)!important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.14),
+    inset -2px -2px 4px rgba(0,0,0,.30),
+    0 0 0 2px var(--bg,#171719),
+    0 0 0 4px #a92c47,
+    0 4px 9px rgba(0,0,0,.22)!important;
+}
+.hero-colour.active{
+  border-color:#f5f5f5!important;
+  outline:2px solid #a92c47!important;
+  outline-offset:3px!important;
+  transform:scale(1.045)!important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.14),
+    inset -2px -2px 4px rgba(0,0,0,.30),
+    0 0 0 2px var(--hero-ring-bg,#171719),
+    0 0 0 4px #a92c47,
+    0 3px 8px rgba(0,0,0,.20)!important;
+}
+.accessory-swatch.active{
+  border-color:#f5f5f5!important;
+  outline:2px solid #a92c47!important;
+  outline-offset:3px!important;
+  transform:scale(1.06)!important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.13),
+    inset -2px -2px 4px rgba(0,0,0,.28),
+    0 0 0 1.5px var(--bg,#fff),
+    0 0 0 3.5px #a92c47,
+    0 3px 7px rgba(0,0,0,.18)!important;
+}
+.color-swatch.active,.color-swatch.selected,
+.color-swatch[aria-pressed="true"],.color-swatch[aria-selected="true"]{
+  border-color:#f5f5f5!important;
+  outline:2px solid #a92c47!important;
+  outline-offset:3px!important;
+  box-shadow:
+    0 0 0 2px var(--bg,#171719),
+    0 0 0 4px #a92c47,
+    0 3px 8px rgba(0,0,0,.20)!important;
+}
+@media (hover:none),(pointer:coarse){
+  .swatch.active:hover,.hero-colour.active:hover,.accessory-swatch.active:hover{transform:scale(1.035)!important}
+}
+</style>
+
+<style id="evo18-dark-mode-selection-ring-fix">
+/* In dark mode, the negative-space selection ring is black instead of white. */
+@media (prefers-color-scheme: dark){
+  .swatch.active,
+  .accessory-swatch.active{
+    outline-color:#050505!important;
+  }
+}
+</style>
+
+
+<style id="evo18-remove-explore-colours">
+/* Hide only the Explore Colours CTA if generated dynamically. */
+[data-label="Explore Colours"],
+[data-label="Explore Colors"],
+.explore-colours,
+.explore-colors,
+.exploreColors,
+.exploreColours{display:none!important;}
+</style>
+
 </head>
 <body><div id="evo18-mobile-legacy-controls" aria-hidden="true"></div>
 <div id="app"></div>
@@ -3077,7 +3349,7 @@ function home(){return `<main>
         <div class="eyebrow">THE FOUR FINISHES</div>
         <h2>Choose the finish that feels like yours.</h2>
         <p>Black, Silver, Glacier and Burgundy give the iPhone 18 Pro generation four distinct visual identities. Explore each finish, then configure your model and storage.</p>
-        <a class="btn primary" href="#/colours">Explore Colours</a>
+        
       </div>
       <div class="visual-story-media"><img src="./assets/visuals/iphone-18-colours.webp" alt="iPhone 18 Pro finishes in Black, Silver, Glacier and Burgundy" width="1200" height="583" loading="lazy" decoding="async"></div>
     </div>
@@ -4640,6 +4912,83 @@ body[data-theme="dark"] .evo18-nav-cart{
 }
 </style>
 
+
+<style id="evo18-premium-selection-rings-v3">
+/* Final EVO18 colourway selection: thicker ring + deliberate negative space + second ring. */
+.swatch,.hero-colour,.accessory-swatch,.color-swatch{
+  --selection-ring:#a92c47;
+  --selection-gap:#171719;
+}
+.accessory-swatch{--selection-gap:#fff;}
+.swatch.active,
+.hero-colour.active,
+.accessory-swatch.active,
+.color-swatch.active,
+.color-swatch.selected,
+.color-swatch[aria-pressed="true"],
+.color-swatch[aria-selected="true"]{
+  border-color:rgba(255,255,255,.92)!important;
+  outline:none!important;
+  transform:scale(1.035)!important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.16),
+    inset -2px -2px 4px rgba(0,0,0,.30),
+    0 0 0 3px var(--selection-gap),
+    0 0 0 5.5px var(--selection-ring),
+    0 0 0 8.5px var(--selection-gap),
+    0 0 0 10px var(--selection-ring),
+    0 4px 10px rgba(0,0,0,.18)!important;
+}
+.hero-colour.active{transform:scale(1.04)!important;}
+.accessory-swatch.active{transform:scale(1.055)!important;}
+
+/* Keep the second ring close and refined on small screens. */
+@media(max-width:700px){
+  .swatch.active,.hero-colour.active,.accessory-swatch.active,.color-swatch.active,.color-swatch.selected,
+  .color-swatch[aria-pressed="true"],.color-swatch[aria-selected="true"]{
+    box-shadow:
+      inset 1px 1px 1px rgba(255,255,255,.16),
+      inset -2px -2px 4px rgba(0,0,0,.30),
+      0 0 0 2.5px var(--selection-gap),
+      0 0 0 5px var(--selection-ring),
+      0 0 0 7.5px var(--selection-gap),
+      0 0 0 9px var(--selection-ring),
+      0 3px 8px rgba(0,0,0,.18)!important;
+  }
+}
+</style>
+<script id="evo18-selection-ring-colors-v3">
+(function(){
+  function hexFromBg(el){
+    var bg=(el.getAttribute('style')||'').match(/background\s*:\s*([^;]+)/i);
+    if(bg) return bg[1].trim();
+    var c=el.dataset&&el.dataset.c;
+    var map={Black:'#34363a',Silver:'#bfc2c3',Glacier:'#8daabd',Burgundy:'#7d3343'};
+    return map[c]||null;
+  }
+  function setVars(){
+    document.querySelectorAll('.swatch.active').forEach(function(el){
+      var c=hexFromBg(el); if(c) el.style.setProperty('--selection-ring',c);
+      el.style.setProperty('--selection-gap','#171719');
+    });
+    document.querySelectorAll('.hero-colour.active').forEach(function(el){
+      var c=({black:'#383b40',silver:'#c1c3c3',glacier:'#9fb5c4',burgundy:'#652632'})[Array.from(el.classList).find(function(x){return ['black','silver','glacier','burgundy'].includes(x);})];
+      if(c) el.style.setProperty('--selection-ring',c);
+      el.style.setProperty('--selection-gap','#171719');
+    });
+    document.querySelectorAll('.accessory-swatch.active').forEach(function(el){
+      var c=hexFromBg(el); if(c) el.style.setProperty('--selection-ring',c);
+      el.style.setProperty('--selection-gap','#fff');
+    });
+    document.querySelectorAll('.color-swatch.active,.color-swatch.selected,.color-swatch[aria-pressed="true"],.color-swatch[aria-selected="true"]').forEach(function(el){
+      var c=hexFromBg(el); if(c) el.style.setProperty('--selection-ring',c);
+    });
+  }
+  document.addEventListener('click',function(){setTimeout(setVars,30);});
+  new MutationObserver(setVars).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','style','aria-pressed','aria-selected']});
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setVars); else setVars();
+})();
+</script>
 </body>
 </html>
 <style id="evo18-mobile-accessory-swatch-circles-v20">
