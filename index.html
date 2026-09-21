@@ -876,6 +876,14 @@ button:not(.order-button):not(.evo18-toast-retry):not(.search-button):not(.evo18
 .tool{
   position:relative;
   overflow:hidden;
+  /* Fix: iOS/Safari can let a transformed pseudo-element bleed past
+     overflow:hidden when the element also has border-radius. Promoting
+     the button to its own composited layer keeps the shine clipped to
+     the button's rounded shape, with no visual side effects (unlike a
+     luminance mask, which fades the button on browsers that support it
+     properly). */
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
 }
 
 .btn:not(.primary)::after,
@@ -907,6 +915,13 @@ button:not(.order-button):not(.evo18-toast-retry):not(.search-button):not(.evo18
   color:#fff!important;
   border-color:rgba(164,57,76,.72)!important;
   box-shadow:0 5px 18px rgba(103,25,42,.18);
+  /* Fix: same iOS/Safari overflow:hidden + border-radius + transform
+     clipping bug as the ghost buttons above — keeps the skewed shine
+     sweep (::before) confined inside the pill shape, e.g. on
+     "Explore Pro" / "Explore Pro Max", without the visual fade a
+     luminance mask would cause on browsers that support it properly. */
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
 }
 .btn.primary::before,
 .cta.primary::before{
@@ -4686,5 +4701,85 @@ body[data-theme="dark"] .evo18-nav-cart{
 }
 @media(max-width:560px){
   .accessory-feature .feature-copy{padding:24px}
+}
+</style>
+
+
+<style id="evo18-mobile-ios-premium-refinement">
+/* iPhone Safari refinement: restore the hero motion that the earlier Safari
+   hardening rule accidentally disabled, and give the accessories catalogue
+   more breathing room on narrow screens. Desktop styles remain untouched. */
+@media screen and (max-width: 768px){
+  .hero-product img{
+    -webkit-animation:heroFloatMobile 5.8s ease-in-out infinite;
+    animation:heroFloatMobile 5.8s ease-in-out infinite;
+    -webkit-animation-fill-mode:both;
+    animation-fill-mode:both;
+    will-change:transform;
+    transform-origin:center center;
+  }
+  .hero-product img.is-changing{
+    -webkit-animation-play-state:paused !important;
+    animation-play-state:paused !important;
+    transform:scale(.97) translateY(10px) !important;
+  }
+}
+@-webkit-keyframes heroFloatMobile{
+  0%,100%{transform:translate3d(0,0,0) rotate(.2deg)}
+  50%{transform:translate3d(0,-10px,0) rotate(-.4deg)}
+}
+@keyframes heroFloatMobile{
+  0%,100%{transform:translate3d(0,0,0) rotate(.2deg)}
+  50%{transform:translate3d(0,-10px,0) rotate(-.4deg)}
+}
+
+/* The previous iOS safeguard forced the accessory grid into two columns,
+   which makes the cards cramped on iPhone. Use a single premium-width card
+   instead, while keeping the desktop/tablet grid unchanged. */
+@media screen and (max-width: 600px){
+  .accessory-product-grid{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:22px !important;
+    width:100% !important;
+  }
+  .accessory-product-card{
+    width:100% !important;
+    max-width:540px !important;
+    margin:0 auto !important;
+    border-radius:28px !important;
+  }
+  .accessory-product-image{
+    height:310px !important;
+    min-height:310px !important;
+    max-height:310px !important;
+    padding:24px !important;
+  }
+  .accessory-product-copy{
+    padding:24px 24px 26px !important;
+  }
+  .accessory-product-copy h3{
+    font-size:24px !important;
+    line-height:1.08 !important;
+    margin-bottom:10px !important;
+  }
+  .accessory-product-category{
+    font-size:11px !important;
+    margin-bottom:9px !important;
+  }
+  .accessory-variant-area{
+    margin-top:18px !important;
+    padding-top:17px !important;
+  }
+  .accessory-product-bottom{
+    margin-top:20px !important;
+    padding-top:18px !important;
+  }
+  .accessory-product-bottom strong{
+    font-size:19px !important;
+  }
+  .accessory-product-bottom .accessory-add{
+    padding:11px 16px !important;
+    font-size:13px !important;
+  }
 }
 </style>
