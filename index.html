@@ -877,13 +877,12 @@ button:not(.order-button):not(.evo18-toast-retry):not(.search-button):not(.evo18
   position:relative;
   overflow:hidden;
   /* Fix: iOS/Safari can let a transformed pseudo-element bleed past
-     overflow:hidden when the element also has border-radius. Promoting
-     the button to its own composited layer keeps the shine clipped to
-     the button's rounded shape, with no visual side effects (unlike a
-     luminance mask, which fades the button on browsers that support it
-     properly). */
-  -webkit-transform:translateZ(0);
-  transform:translateZ(0);
+     overflow:hidden when the element also has border-radius. A flat
+     (single-colour) mask forces the browser onto the masking render
+     path that clips this correctly, without translateZ's unreliability
+     and without the fade a two-colour mask gradient would cause. */
+  -webkit-mask-image:-webkit-radial-gradient(white,white);
+  mask-image:radial-gradient(white,white);
 }
 
 .btn:not(.primary)::after,
@@ -918,10 +917,11 @@ button:not(.order-button):not(.evo18-toast-retry):not(.search-button):not(.evo18
   /* Fix: same iOS/Safari overflow:hidden + border-radius + transform
      clipping bug as the ghost buttons above — keeps the skewed shine
      sweep (::before) confined inside the pill shape, e.g. on
-     "Explore Pro" / "Explore Pro Max", without the visual fade a
-     luminance mask would cause on browsers that support it properly. */
-  -webkit-transform:translateZ(0);
-  transform:translateZ(0);
+     "Explore Pro" / "Explore Pro Max". Flat mask (same colour at both
+     stops) triggers Safari's correct clipping without fading anything,
+     since a uniform mask is 100% opaque everywhere. */
+  -webkit-mask-image:-webkit-radial-gradient(white,white);
+  mask-image:radial-gradient(white,white);
 }
 .btn.primary::before,
 .cta.primary::before{
@@ -4588,6 +4588,57 @@ body[data-theme="dark"] .evo18-nav-cart{
   window.addEventListener('pageshow',function(){ setTimeout(bootCurrentRoute,0); });
 })();
 </script>
+
+
+
+
+
+<style id="evo18-scan-target-smooth-final">
+/* Keep target coordinates fixed while restoring the satisfying pop/near/found motion. */
+#evo18-scan-overlay .evo18-scan-target{
+  position:absolute !important;
+  margin:0 !important;
+  translate:none !important;
+  transform-origin:50% 50% !important;
+  will-change:transform,opacity,box-shadow !important;
+  transition:
+    transform 180ms cubic-bezier(.22,1,.36,1),
+    opacity 160ms ease,
+    box-shadow 180ms ease !important;
+}
+#evo18-scan-overlay .evo18-scan-target:not(.near):not(.found){
+  transform:translate(-50%,-50%) scale(.78) !important;
+}
+#evo18-scan-overlay .evo18-scan-target.near{
+  transform:translate(-50%,-50%) scale(1.12) !important;
+}
+#evo18-scan-overlay .evo18-scan-target.found{
+  transform:translate(-50%,-50%) scale(1.75) !important;
+  opacity:0 !important;
+  transition:
+    transform 220ms cubic-bezier(.16,1,.3,1),
+    opacity 180ms ease !important;
+}
+#evo18-scan-overlay .evo18-scan-target:hover,
+#evo18-scan-overlay .evo18-scan-target:focus,
+#evo18-scan-overlay .evo18-scan-target:focus-visible,
+#evo18-scan-overlay .evo18-scan-target:active{
+  /* Hover never changes its position; only preserve the current game state. */
+  margin:0 !important;
+  translate:none !important;
+}
+#evo18-scan-overlay .evo18-scan-target::before,
+#evo18-scan-overlay .evo18-scan-target::after{
+  transition:
+    transform 180ms cubic-bezier(.22,1,.36,1),
+    opacity 160ms ease !important;
+}
+@media (prefers-reduced-motion: reduce){
+  #evo18-scan-overlay .evo18-scan-target{
+    transition:transform 80ms ease,opacity 80ms ease !important;
+  }
+}
+</style>
 
 </body>
 </html>
