@@ -3190,6 +3190,45 @@ html { scroll-behavior:smooth; }
 .exploreColours{display:none!important;}
 </style>
 
+
+<style id="evo18-desktop-scroll-animations">
+@media (min-width:851px) and (prefers-reduced-motion:no-preference){
+  .home-page.evo18-motion-ready > .section{
+    opacity:0;
+    transform:translate3d(0,34px,0);
+    transition:opacity .75s cubic-bezier(.22,1,.36,1),
+               transform .8s cubic-bezier(.22,1,.36,1);
+  }
+  .home-page.evo18-motion-ready > .section.evo18-in-view{
+    opacity:1;
+    transform:none;
+  }
+  .home-page.evo18-motion-ready .visual-story-media img,
+  .home-page.evo18-motion-ready .premium-model-card img{
+    transition:transform 1s cubic-bezier(.22,1,.36,1);
+  }
+  .home-page.evo18-motion-ready .visual-story-media img{
+    transform:scale(1.02);
+  }
+  .home-page.evo18-motion-ready .visual-story.evo18-in-view .visual-story-media img,
+  .home-page.evo18-motion-ready .premium-intro.evo18-in-view .premium-model-card img{
+    transform:scale(1);
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .home-page .section,
+  .home-page .premium-model-card,
+  .home-page .visual-story-copy,
+  .home-page .visual-story-media,
+  .home-page .storage-card,
+  .home-page .compare-card{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
+}
+</style>
+
 </head>
 <body><div id="evo18-mobile-legacy-controls" aria-hidden="true"></div>
 <div id="app"></div>
@@ -3302,7 +3341,7 @@ function setHeroProduct(model,colour,button){
   else swap();
 }
 window.setHeroProduct=setHeroProduct;
-function home(){return `<main>
+function home(){return `<main class="home-page">
 <section class="hero-premium">
   <div class="wrap hero-premium-inner">
     <div class="hero-copy">
@@ -4989,6 +5028,86 @@ body[data-theme="dark"] .evo18-nav-cart{
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setVars); else setVars();
 })();
 </script>
+
+<script id="evo18-desktop-scroll-animation-script">
+(function(){
+  let observer=null;
+  let depthBound=false;
+
+  function initEvo18ScrollMotion(){
+    const root=document.querySelector('.home-page');
+    if(!root) return;
+
+    const desktop=window.matchMedia('(min-width:851px)').matches;
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!desktop || reduced){
+      root.classList.remove('evo18-motion-ready');
+      return;
+    }
+
+    root.classList.add('evo18-motion-ready');
+
+    if(observer) observer.disconnect();
+
+    const sections=root.querySelectorAll(':scope > .section');
+    observer=new IntersectionObserver((entries,obs)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('evo18-in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    },{
+      threshold:0.08,
+      rootMargin:'0px 0px -6% 0px'
+    });
+
+    sections.forEach((section,i)=>{
+      section.style.transitionDelay=Math.min(i*0.04,0.2)+'s';
+      observer.observe(section);
+    });
+
+    if(!depthBound){
+      depthBound=true;
+      let ticking=false;
+      window.addEventListener('scroll',function(){
+        if(ticking) return;
+        ticking=true;
+        requestAnimationFrame(function(){
+          ticking=false;
+          const current=document.querySelector('.home-page.evo18-motion-ready');
+          if(!current) return;
+          current.querySelectorAll('.visual-story.evo18-in-view .visual-story-media img').forEach(img=>{
+            const r=img.getBoundingClientRect();
+            if(r.bottom<0 || r.top>window.innerHeight) return;
+            const progress=(r.top+r.height/2-window.innerHeight/2)/(window.innerHeight/2);
+            const y=Math.max(-7,Math.min(7,-progress*4));
+            img.style.transform='scale(1) translate3d(0,'+y+'px,0)';
+          });
+        });
+      },{passive:true});
+    }
+  }
+
+  // The site is a hash router, so the homepage can be rendered after DOMContentLoaded.
+  // Watch for route renders and initialize only when the homepage actually exists.
+  const bootObserver=new MutationObserver(function(){
+    if(document.querySelector('.home-page')) initEvo18ScrollMotion();
+  });
+  bootObserver.observe(document.getElementById('app') || document.body,{childList:true,subtree:true});
+
+  window.addEventListener('hashchange',function(){
+    requestAnimationFrame(initEvo18ScrollMotion);
+  });
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){requestAnimationFrame(initEvo18ScrollMotion)},{once:true});
+  }else{
+    requestAnimationFrame(initEvo18ScrollMotion);
+  }
+})();
+</script>
+
 </body>
 </html>
 <style id="evo18-mobile-accessory-swatch-circles-v20">
